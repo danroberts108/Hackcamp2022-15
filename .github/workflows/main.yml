@@ -12,6 +12,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          - path: site
       - name: Install ssh key
         uses: shimataro/ssh-key-action@v2
         with:
@@ -19,11 +23,5 @@ jobs:
           known_hosts: 'placeholder'
       - name: Adding known hosts
         run: ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
-      - name: cd
-        run: cd /
-      - name: list
-        run: ls
-      - name: tree
-        run: tree
       - name: Deploy with rsync
-        run: rsync -avz /github/workspace/src/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:public_html/
+        run: rsync -avz $GITHUB_WORKSPACE/site/src/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:public_html/
