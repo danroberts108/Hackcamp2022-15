@@ -26,4 +26,4 @@ jobs:
       - name: tree
         run: tree
       - name: Deploy with rsync
-        run: rsync -avz . ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:public_html/
+        run: rsync -avz /github/workspace/src/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:public_html/
