@@ -12,14 +12,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: rsync deploy2
-      uses: trendyminds/github-actions-rsync@master
-      with:
-        RSYNC_OPTIONS: -avzr --delete --exclude '.git*'
-        RSYNC_TARGET: ${{ secrets.DEPLOY_PATH }}
-        RSYNC_SOURCE: src/
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
-        SSH_USERNAME: ${{ secrets.DEPLOY_USER }}
-        SSH_HOSTNAME: ${{ secrets.DEPLOY_USER }}
+      - name: Install ssh key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.DEPLOY_KEY }}
+          known_hosts: ${{ secrets.DEPLOY_HOST }}
+      - name: Deploy with rsync
+        run: rsync -avz src/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/public_html/
