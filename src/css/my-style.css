@@ -1,0 +1,43 @@
+#title #menu #footer {
+    background-color: #ffffff;
+    color: #323233;
+}
+#menu {
+    height: 500px;
+}
+#menu a {
+    background-color: #323233;
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    padding: 3px;
+}
+#menu li {
+    list-style: none;
+    margin: 2px;
+}
+#menu a:hover {
+    background-color: #000000;
+    color: #ddd;
+    text-decoration:underline;
+    display: block;
+}
+
+#content {
+    background-color: #fff;
+    border-top: solid 6px #000000;
+
+}
+
+#footer {
+    margin_top: 20px;
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+}
+
+.scottishpower {
+    width: auto;
+    height: 150px;
+}
+
