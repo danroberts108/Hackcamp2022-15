@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: rsync deploy
-      uses: burnett01/rsync-deployments@5.2
+    - name: rsync deploy2
+      uses: trendyminds/github-actions-rsync@master
       with:
-        switches: -avzr --delete
-        path: src/
-        remote_path: ${{ secrets.DEPLOY_PATH }}
-        remote_host: ${{ secrets.DEPLOY_HOST }}
-        remote_port: ${{ secrets.DEPLOY_PORT }}
-        remote_user: ${{ secrets.DEPLOY_USER }}
-        remote_key: ${{ secrets.DEPLOY_KEY }}
+        RSYNC_OPTIONS: -avzr --delete --exclude '.git*'
+        RSYNC_TARGET: ${{ secrets.DEPLOY_PATH }}
+        RSYNC_SOURCE: src/
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+        SSH_USERNAME: ${{ secrets.DEPLOY_USER }}
+        SSH_HOSTNAME: ${{ secrets.DEPLOY_USER }}
