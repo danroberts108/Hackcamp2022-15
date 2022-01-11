@@ -20,6 +20,6 @@ jobs:
       - name: Adding known hosts
         run: ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
       - name: Deploy with rsync
-        run: rsync -avz src/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/public_html/
+        run: rsync -avz ./src/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:public_html/
       - name: remove files on server
         run: ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST}}
