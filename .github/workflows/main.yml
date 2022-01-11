@@ -22,6 +22,6 @@ jobs:
       - name: list
         run: ls
       - name: tree
-        - run: tree
+        run: tree
       - name: Deploy with rsync
         run: rsync -avz /home/runner/work/Hackcamp2022-15/Hackcamp2022-15/src/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:public_html/
