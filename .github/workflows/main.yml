@@ -14,8 +14,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          - path: site
       - name: Install ssh key
         uses: shimataro/ssh-key-action@v2
         with:
@@ -24,4 +22,4 @@ jobs:
       - name: Adding known hosts
         run: ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
       - name: Deploy with rsync
-        run: rsync -avz $GITHUB_WORKSPACE/site/src/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:public_html/
+        run: rsync -avz $GITHUB_WORKSPACE/src/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:public_html/
