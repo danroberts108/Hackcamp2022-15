@@ -6,6 +6,7 @@ name: CI
 on:
   schedule:
     - cron: '30 9,4 * * *'
+  workflow_dispatch:
 
 jobs:
   deploy:
