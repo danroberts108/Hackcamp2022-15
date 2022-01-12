@@ -8,7 +8,7 @@
     <div class="row" style="height:5vw;">
     </div>
 
-    <div class="row">
+    <!--<div class="row">
         <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
         </div>
 
@@ -33,6 +33,16 @@
 
         <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
         </div>
+    </div>-->
+    <div class="upload-container">
+        <form action="../upload.php" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="chosenFile" class="form-label">Risk file (csv)</label>
+                <input type="file" class="form-control">
+                <div class="form-text">Only .csv files accepted</div>
+            </div>
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
 </div>
 
