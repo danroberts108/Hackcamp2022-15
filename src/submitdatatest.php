@@ -1,6 +1,7 @@
-<?php require('src/Models/Database.php');
-require('src/Models/Data.php');
-require('src/Models/DataControl.php');
+<?php
+require_once('Models/Database.php');
+require('Models/Data.php');
+require('Models/DataControl.php');
 
 $view = new stdClass();
 $view->pageTitle = 'Submit Data';
@@ -19,4 +20,4 @@ if (isset($_POST['submit'])) {
 
 }
 
-require_once('src/Views/submitdatatest.phtml');
+require_once('Views/submitdatatest.phtml');
