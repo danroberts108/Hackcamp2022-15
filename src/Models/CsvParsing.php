@@ -9,6 +9,10 @@ class CsvParsing {
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                 $risk = new Risk($data[0], $data[1], $data[2], $data[3]);
                 $data[] = $risk;
+                //var_dump($data);
+                //SQL statement to add line of data to table, and replace if it already exists
+
+
             }
         }
         return $data;

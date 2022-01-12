@@ -1,10 +1,10 @@
 <?php
-require_once('Models/Risks.php');
+//require_once('Models/Risks.php');
 require_once('Models/CsvParsing.php');
 $view = new stdClass();
 $view->pageTitle = 'Upload';
 
-$riskSet = new Risks();
+//$riskSet = new Risks();
 $parse = new CsvParsing();
 //$riskSet->testConnection();
 
