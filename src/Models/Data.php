@@ -35,6 +35,14 @@ class Data extends Database
     }
 
     public function getRiskFromDatabase($id) {
+        $statement = $this->connect()->prepare("SELECT * FROM Risks WHERE id=?");
+        $statement->execute($id);
 
+        $result = $statement->fetch();
+
+        $risk = new Risk($result['lattitude'], $result['longitude'], $result['distance'], $result['district']);
+        $risk->setId($result['id']);
+
+        return $risk;
     }
 }
