@@ -1,16 +1,18 @@
 <?php
+require_once("Models/Data.php");
 
 class DataControl extends Data
 {
 
     private $latitude, $longitude, $distance, $district;
 
-    public function __construct($latitude, $longitude, $distance, $district)
+    public function __construct($latitude,$longitude,$distance,$district)
     {
         $this->latitude = $latitude;
         $this->longitude = $longitude;
         $this->distance = $distance;
         $this->district = $district;
+        var_dump($this->latitude, $this->longitude,$this->distance, $this->district);
     }
 
     public function registerData()

@@ -1,10 +1,9 @@
 <?php
+require_once("Models/Database.php");
+
 
 class Data extends Database
 {
-
-
-
     protected function setData($latitude, $longitude,$distance, $district) {
         $statement = $this->connect()->prepare('INSERT INTO Risks (latitude, longitude, distance, district) VALUES (?, ?, ?, ?);');
 
