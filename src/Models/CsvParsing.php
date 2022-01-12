@@ -1,8 +1,7 @@
 <?php
 
-require_once("Risk.php");
 
-class CsvParsing {
+class CsvParsing extends Risk {
     public function getRiskFromCsv($file) {
         $data = array();
         if (($handle = fopen($file, "r")) !== FALSE) {
