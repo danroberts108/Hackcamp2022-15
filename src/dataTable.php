@@ -6,7 +6,7 @@ $view = new stdClass();
 $view->pageTitle = 'Data Table';
 
 $data = new Data();
-$dataset = $data->getAllRisks();
+$dataset = $data->getAllExtendedRisks();
 
 $view->dataset = $dataset;
 

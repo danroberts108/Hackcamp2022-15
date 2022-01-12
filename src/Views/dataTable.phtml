@@ -1,6 +1,6 @@
 <?php require('template/header.phtml') ?>
 
-<table class="table table-striped" data-toggle="table" data-search="true" data-show-columns="true" data-pagination="true">
+<table class="table" data-toggle="table" data-search="true" data-show-columns="true" data-pagination="true">
     <!--Table header with the column names in-->
     <thead>
     <tr>
@@ -15,12 +15,23 @@
     <tbody>
     <!--Creates a new table row for every record returned-->
     <?php foreach ($view->dataset as $dataset) {
+        $riskColorClass = "";
+        if ($dataset->getRiskLevel() == "High") {
+            $riskColorClass = "table-danger";
+        } else if ($dataset->getRiskLevel() == "Medium") {
+            $riskColorClass = "table-warning";
+        } else if ($dataset->getRiskLevel() == "Low") {
+            $riskColorClass = "table-success";
+        } else {
+            $riskColorClass = "table-secondary";
+        }
         echo '<tr>' .
             '<th scope="row">' . $dataset->getId() . '</th>' .
             '<td>' . $dataset->getLat() . '</td>' .
             '<td>' . $dataset->getLon() . '</td>' .
             '<td>' . $dataset->getDistance() . '</td>' .
             '<td>' . $dataset->getDistrict() . '</td>' .
+            '<td class="' . $riskColorClass . '">' . $dataset->getRiskLevel() . '</td>' .
             '</tr>';
     }
     ?>

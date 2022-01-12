@@ -1,6 +1,7 @@
 <?php
 require_once("Models/Database.php");
 require_once("Models/Risk.php");
+require_once("Models/ExtendedRisk.php");
 
 class Data extends Database
 {
@@ -44,6 +45,26 @@ class Data extends Database
             $risk = new Risk($row['latitude'], $row['longitude'], $row['distance'], $row['district']);
             $risk->setId($row['id']);
             $result[] = $risk;
+        }
+
+        return $result;
+    }
+
+    public function getAllExtendedRisks() {
+        $riskArray = $this->getAllRisks();
+        $result = [];
+
+        for ($i = 0; $i < count($riskArray); $i++) {
+            $risk = $riskArray[$i];
+            $riskLevel = "Unknown";
+            if ($risk->getDistance() >= 3) {
+                $riskLevel = "Low";
+            } else if($risk->getDistance() < 3 && $risk->getDistance() > 1) {
+                $riskLevel = "Medium";
+            } else if ($risk->getDistance() < 1) {
+                $riskLevel = "High";
+            }
+            $result[] = new ExtendedRisk($risk->getId(), $risk->getLat(), $risk->getLon(), $risk->getDistance(), $risk->getDistrict(), $riskLevel);
         }
 
         return $result;
