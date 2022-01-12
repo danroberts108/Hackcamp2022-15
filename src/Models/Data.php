@@ -21,7 +21,7 @@ class Data extends Database
 
     public function addBulkData($riskArray) {
         for ($i = 0; $i < count($riskArray); $i++) {
-            setData($riskArray[$i]->getLat(), $riskArray[$i]->getLon(), $riskArray->getDistance(), $riskArray->getDistrict());
+            $this->setData($riskArray[$i]->getLat(), $riskArray[$i]->getLon(), $riskArray->getDistance(), $riskArray->getDistrict());
         }
     }
 
@@ -36,7 +36,27 @@ class Data extends Database
         echo "</table";
     }
 
-    public function getRiskFromDatabase($id) {
+    public function getRiskFromDatabase($id):Risk {
+        $statement = $this->connect()->prepare("SELECT * FROM Risks WHERE id=?");
+        $statement->execute($id);
 
+        $result = $statement->fetch();
+
+        $risk = new Risk($result['lattitude'], $result['longitude'], $result['distance'], $result['district']);
+        $risk->setId($result['id']);
+
+        return $risk;
+    }
+
+    public function getRiskFromDatabaseWithLonLat($lon, $lat):Risk {
+        $statement = $this->connect()->prepare("SELECT * FROM Risks WHERE longitude=? AND lattitude=?");
+        $statement->execute(array($lon, $lat));
+
+        $result = $statement->fetch();
+
+        $risk = new Risk($result['lattitude'], $result['longitude'], $result['distance'], $result['district']);
+        $risk->setId($result['id']);
+
+        return $risk;
     }
 }
