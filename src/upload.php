@@ -16,8 +16,7 @@ if(isset($_POST['submit'])) {
             if(is_uploaded_file($_FILES['chosenFile']['tmp_name'])) { //if file was uploaded
                 //echo "[OPENING CSV]";
 
-                $data = array();
-                $parse->getRiskFromCsv($_FILES['chosenFile']['tmp_name']);
+                $dataArray = $parse->getRiskFromCsv($_FILES['chosenFile']['tmp_name']);
             }
         }
         catch(Exception $e) {

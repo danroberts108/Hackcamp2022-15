@@ -4,7 +4,7 @@ require_once("Models/Data.php");
 class DataControl extends Data
 {
 
-    private $latitude, $longitude, $distance, $district;
+    protected $latitude, $longitude, $distance, $district;
 
     public function __construct($latitude,$longitude,$distance,$district)
     {

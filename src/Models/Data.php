@@ -18,8 +18,9 @@ class Data extends Database
     }
 
     public function addBulkData($riskArray) {
-        for ($i = 0; $i < count($riskArray); $i++) {
-            setData($riskArray[$i]->getLat(), $riskArray[$i]->getLon(), $riskArray->getDistance(), $riskArray->getDistrict());
+        for ($i = 1; $i < count($riskArray); $i++) {
+            $risk = $riskArray[$i];
+            $this->setData($risk->getLat(), $risk->getLon(), $risk->getDistance(), $risk->getDistrict());
         }
     }
 
