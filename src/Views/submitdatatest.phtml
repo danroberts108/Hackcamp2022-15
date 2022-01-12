@@ -1,0 +1,33 @@
+<?php require('template/header.phtml') ?>
+
+<h4>Upload Data below</h4>
+
+<body>
+<div class="container">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <label>Latitude: </label>
+        <input type="text" name="latitude" placeholder="Enter latitude">
+        <br>
+        <br>
+        <label>Longitude: </label>
+        <input type="text" name="longitude" placeholder="Enter longitude">
+        <br>
+        <br>
+        <label>Distance in metres: </label>
+        <input type="text" name="distance" placeholder="Enter distance">
+        <br>
+        <br>
+        <label>District: </label>
+        <input type="text" name="district" placeholder="Enter district">
+        <br>
+        <br>
+
+        <input type="submit" name="submit" value="submit">
+    </form>
+    <?php if (isset($view->result)) : ?>
+        <p><?php echo $view->result; ?></p>
+    <?php endif; ?>
+</div>
+</body>
+
+<?php require('template/footer.phtml') ?>
