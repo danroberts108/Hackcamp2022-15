@@ -1,8 +1,8 @@
 <?php
 require_once("Models/DataControl.php");
+require_once("Models/Risk.php");
 $view = new stdClass();
 $view->pageTitle = 'Upload';
-$parse = new CsvParsing();
 
 //The form that lets the user upload a csv
 if(isset($_POST['submit'])) {
