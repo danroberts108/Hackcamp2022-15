@@ -45,3 +45,9 @@
     padding: 2rem 10rem;
 }
 
+.page-header {
+    background-color:black;
+    color:white;
+    border-bottom:black;
+}
+
