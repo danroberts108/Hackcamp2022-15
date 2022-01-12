@@ -2,7 +2,7 @@
 
 require_once("Data.php");
 
-class CsvParsing extends Risk {
+class CsvParsing {
 
     public function getRiskFromCsv($file) {
         $data = array();

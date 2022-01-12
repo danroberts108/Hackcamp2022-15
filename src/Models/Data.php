@@ -2,8 +2,6 @@
 require_once("Models/Database.php");
 
 
-require_once("Models/Database.php");
-
 class Data extends Database
 {
     protected function setData($latitude, $longitude,$distance, $district) {
@@ -21,7 +19,7 @@ class Data extends Database
 
     public function addBulkData($riskArray) {
         for ($i = 0; $i < count($riskArray); $i++) {
-            $this->setData($riskArray[$i]->getLat(), $riskArray[$i]->getLon(), $riskArray->getDistance(), $riskArray->getDistrict());
+            setData($riskArray[$i]->getLat(), $riskArray[$i]->getLon(), $riskArray->getDistance(), $riskArray->getDistrict());
         }
     }
 
