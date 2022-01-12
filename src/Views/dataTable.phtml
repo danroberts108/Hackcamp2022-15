@@ -1,0 +1,31 @@
+<?php require('template/header.phtml') ?>
+
+<table class="table table-striped" data-toggle="table" data-search="true" data-show-columns="true" data-pagination="true">
+    <!--Table header with the column names in-->
+    <thead>
+    <tr>
+        <th scope="col">Risk ID</th>
+        <th scope="col">Lattitude</th>
+        <th scope="col">Longitude</th>
+        <th scope="col">Distance (m)</th>
+        <th scope="col">District</th>
+        <th scope="col">Risk Level</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--Creates a new table row for every record returned-->
+    <?php foreach ($view->dataset as $dataset) {
+        echo '<tr>' .
+            '<th scope="row">' . $dataset->getId() . '</th>' .
+            '<td>' . $dataset->getLat() . '</td>' .
+            '<td>' . $dataset->getLon() . '</td>' .
+            '<td>' . $dataset->getDistance() . '</td>' .
+            '<td>' . $dataset->getDistrict() . '</td>' .
+            '</tr>';
+    }
+    ?>
+    </tbody>
+</table>
+
+
+<?php require('template/footer.phtml') ?>

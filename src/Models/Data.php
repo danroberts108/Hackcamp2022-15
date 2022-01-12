@@ -1,6 +1,6 @@
 <?php
 require_once("Models/Database.php");
-
+require_once("Models/Risk.php");
 
 class Data extends Database
 {
@@ -33,6 +33,20 @@ class Data extends Database
             echo "<tr><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td><td>" . $row[4] . "</td></tr>";
         }
         echo "</table";
+    }
+
+    public function getAllRisks() {
+        $statement = $this->connect()->prepare("SELECT * FROM Risks");
+        $statement->execute();
+
+        $result = [];
+        while ($row = $statement->fetch()) {
+            $risk = new Risk($row['latitude'], $row['longitude'], $row['distance'], $row['district']);
+            $risk->setId($row['id']);
+            $result[] = $risk;
+        }
+
+        return $result;
     }
 
     public function getRiskFromDatabase($id):Risk {
