@@ -10,7 +10,7 @@ class Calculator extends Data {
 
     }
 
-    /*public function calculate() {
+    public function calculate() {
         if (is_numeric($this->resources) && $this->district = 'Dumfries') {
             $result = $this->getRisks("Dumfries") / $this->resources;
         }
@@ -33,9 +33,9 @@ class Calculator extends Data {
             $result = false;
         }
         return $result;
-    }*/
+    }
 
-    public function calculate() {
+    /*public function calculate() {
         if (is_numeric($this->resources) && $this->district = 'Dumfries') {
             $result = ceil($this->getRisksDumfries() / $this->resources);
         }
@@ -58,5 +58,5 @@ class Calculator extends Data {
             $result = false;
         }
         return $result;
-    }
+    }*/
 }

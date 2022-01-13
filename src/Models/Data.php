@@ -91,15 +91,16 @@ class Data extends Database
 
     //Could all these functions be combined into 1 with an argument?
 
-    /*public function getRisks($district) {
+    public function getRisks($district) {
         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
         $statement->execute([$district]);
         return intval($statement->fetch());
-    }*/
+    }
 
     public function getRisksDumfries() {
         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district=?;');
-        $statement->execute(["%Dumfries%"]);
+        $statement->execute(["Dumfries"]);
+        var_dump($statement->fetch());
         return intval($statement->fetch());
     }
     public function getRisksCentral() {
