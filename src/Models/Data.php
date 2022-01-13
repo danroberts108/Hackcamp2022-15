@@ -89,27 +89,39 @@ class Data extends Database
         }
     }
     public function getRisksDumfries() {
-        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Dumfries"');
-        $statement->execute();
+        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district=?;');
+        $statement->execute(["%Dumfries%"]);
+        $count = intval($statement->fetch());
+        return $count;
     }
     public function getRisksCentral() {
         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Central & Fife"');
         $statement->execute();
+        $count = intval($statement->fetch());
+        return $count;
     }
     public function getRisksGlasgow() {
         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Glasgow"');
         $statement->execute();
+        $count = intval($statement->fetch());
+        return $count;
     }
     public function getRisksLanark() {
         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Lanarkshire"');
         $statement->execute();
+        $count = intval($statement->fetch());
+        return $count;
     }
     public function getRisksEdinburgh() {
         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Edinburgh & Borders"');
         $statement->execute();
+        $count = intval($statement->fetch());
+        return $count;
     }
     public function getRisksAyshire() {
         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Ayshire & Clyde South"');
         $statement->execute();
+        $count = intval($statement->fetch());
+        return $count;
     }
 }
