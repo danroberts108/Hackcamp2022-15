@@ -55,6 +55,8 @@
     padding-top: 3rem;
 }
 
+
+/*TODO Pie Chart Method 1, uses rectangular divs to cover the background at specific angles to create segments*/
 .pieChart {
     border: dashed yellow;
     margin-top: 10vh;
@@ -112,15 +114,15 @@ body,
 
 
 
-
+/*TODO Pie Chart Method 2, uses conic-gradients to create segments*/
 
 .pie {
     width: 30vw; height: 30vw;
     border-radius: 50%;
 
     background: conic-gradient(
-            red attr(--offsetHigh %),
-            orange attr(--offsetMed %),
-            yellow attr(--offsetLow %),
+            red attr(--offsetHigh deg),
+            orange attr(--offsetMed deg),
+            yellow attr(--offsetLow deg),
             yellowgreen 0);
 }

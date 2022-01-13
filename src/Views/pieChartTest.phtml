@@ -1,0 +1,33 @@
+<?php require('template/header.phtml') ?>
+
+<div> <!-- Page Container -->
+
+    <div class="row page-header">
+        <h1>Pie Chart Test<h1>
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="row">
+            <div class="pieChart"> <!-- Pie Chart Method 1 -->
+                <!-- use php variables for offset and value
+                '--offset' = the current position of the charts calculation
+                '--value' = the percentage of risks
+                '--over50' = a boolean for if the segment is bigger than 50, as it cannot display a segment >50 -->
+
+                <div class="pieSegment" style="--offset:0; --value:<?php echo $view->highRiskPercentage."%"; ?>; --bg:red; --over50:<?php if($view->highRiskPercentage > 50){echo "1";} else{echo "0";}?>;"></div>
+                <div class="pieSegment" style="--offset:<?php echo $view->highRiskPercentage ?>; --value:<?php echo $view->medRiskPercentage."%"; ?>; --bg:orange; --over50:<?php if($view->medRiskPercentage > 50){echo "1";} else{echo "0";}?>;"></div>
+                <div class="pieSegment" style="--offset:<?php echo $view->highRiskPercentage + $view->medRiskPercentage ?>; --value:<?php echo $view->LowRiskPercentage."%"; ?>; --bg:yellow; --over50:<?php if($view->lowRiskPercentage > 50){echo "1";} else{echo "0";}?>;"></div>
+            </div>
+        </div>
+
+        <div class="row"> <!-- Pie Chart Method 2 -->
+            <div class="pie" style="--offsetHigh:<?php echo (($view->highRiskPercentage/100)*360); ?>; --offsetMed:<?php echo (($view->medRiskPercentage/100)*360); ?>; --offsetLow:<?php echo (($view->lowRiskPercentage)*360); ?>">
+
+                <!-- TODO This is a second pie chart using a different method but its now broken when
+                I was trying to set variables for the segment size-->
+
+            </div>
+        </div>
+    </div>
+
+</div>
