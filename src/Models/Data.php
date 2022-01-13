@@ -88,40 +88,43 @@ class Data extends Database
             $statement->execute();
         }
     }
+
+    //Could all these functions be combined into 1 with an argument?
+
+    /*public function getRisks($district) {
+        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
+        $statement->execute([$district]);
+        return intval($statement->fetch());
+    }*/
+
     public function getRisksDumfries() {
         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district=?;');
         $statement->execute(["%Dumfries%"]);
-        $count = intval($statement->fetch());
-        return $count;
+        return intval($statement->fetch());
     }
     public function getRisksCentral() {
         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Central & Fife"');
         $statement->execute();
-        $count = intval($statement->fetch());
-        return $count;
+        return intval($statement->fetch());
     }
     public function getRisksGlasgow() {
         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Glasgow"');
         $statement->execute();
-        $count = intval($statement->fetch());
-        return $count;
+        return intval($statement->fetch());
     }
     public function getRisksLanark() {
         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Lanarkshire"');
         $statement->execute();
-        $count = intval($statement->fetch());
-        return $count;
+        return intval($statement->fetch());
     }
     public function getRisksEdinburgh() {
         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Edinburgh & Borders"');
         $statement->execute();
-        $count = intval($statement->fetch());
-        return $count;
+        return intval($statement->fetch());
     }
     public function getRisksAyshire() {
         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Ayshire & Clyde South"');
         $statement->execute();
-        $count = intval($statement->fetch());
-        return $count;
+        return intval($statement->fetch());
     }
 }
