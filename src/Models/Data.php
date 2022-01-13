@@ -25,17 +25,6 @@ class Data extends Database
         }
     }
 
-    public function showAllData() {
-        $statement = $this->connect()->prepare('SELECT * FROM Risks');
-        $statement->execute();
-
-        echo "<table border='1'>";
-        while ($row = $statement->fetch()) {
-            echo "<tr><td>" . $row[1] . "</td><td>" . $row[2] . "</td><td>" . $row[3] . "</td><td>" . $row[4] . "</td></tr>";
-        }
-        echo "</table";
-    }
-
     public function getAllRisks() {
         $statement = $this->connect()->prepare("SELECT * FROM Risks");
         $statement->execute();
@@ -61,7 +50,7 @@ class Data extends Database
                 $riskLevel = "Low";
             } else if($risk->getDistance() < 3 && $risk->getDistance() > 1) {
                 $riskLevel = "Medium";
-            } else if ($risk->getDistance() < 1) {
+            } else if ($risk->getDistance() <= 1) {
                 $riskLevel = "High";
             }
             $result[] = new ExtendedRisk($risk->getId(), $risk->getLat(), $risk->getLon(), $risk->getDistance(), $risk->getDistrict(), $riskLevel);
@@ -92,5 +81,35 @@ class Data extends Database
         $risk->setId($result['id']);
 
         return $risk;
+    }
+    public function getNumberRisks() {
+        if (isset($_POST[''])) {
+            $statement = $this->connect()->prepare('SELECT COUNT FROM Risks');
+            $statement->execute();
+        }
+    }
+    public function getRisksDumfries() {
+        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Dumfries"');
+        $statement->execute();
+    }
+    public function getRisksCentral() {
+        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Central & Fife"');
+        $statement->execute();
+    }
+    public function getRisksGlasgow() {
+        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Glasgow"');
+        $statement->execute();
+    }
+    public function getRisksLanark() {
+        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Lanarkshire"');
+        $statement->execute();
+    }
+    public function getRisksEdinburgh() {
+        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Edinburgh & Borders"');
+        $statement->execute();
+    }
+    public function getRisksAyshire() {
+        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Ayshire & Clyde South"');
+        $statement->execute();
     }
 }
