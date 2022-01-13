@@ -11,22 +11,22 @@ class Calculator extends Data {
     }
     public function calculate() {
         if (is_numeric($this->resources) && $this->district = 'Dumfries') {
-            $result = $this->getRisksDumfries() / $this->resources;
+            $result = ceil($this->getRisksDumfries() / $this->resources);
         }
         elseif (is_numeric($this->resources) && $this->district = 'Central & Fife') {
-            $result = $this->getRisksCentral() / $this->resources;
+            $result = ceil($this->getRisksCentral() / $this->resources);
         }
         elseif (is_numeric($this->resources) && $this->district = 'Glasgow') {
-            $result = $this->getRisksGlasgow() / $this->resources;
+            $result = ceil($this->getRisksGlasgow() / $this->resources);
         }
         elseif (is_numeric($this->resources) && $this->district = 'Lanarkshire') {
-            $result = $this->getRisksLanark() / $this->resources;
+            $result = ceil($this->getRisksLanark() / $this->resources);
         }
         elseif (is_numeric($this->resources) && $this->district = 'Edinburgh & Borders') {
-            $result = $this->getRisksEdinburgh() / $this->resources;
+            $result = ceil($this->getRisksEdinburgh() / $this->resources);
         }
         elseif (is_numeric($this->resources) && $this->district = 'Ayrshire & Clyde South') {
-            $result = $this->getRisksAyshire() / $this->resources;
+            $result = ceil($this->getRisksAyshire() / $this->resources);
         }
         else {
             $result = false;
