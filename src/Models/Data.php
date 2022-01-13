@@ -5,7 +5,8 @@ require_once("Models/ExtendedRisk.php");
 
 class Data extends Database
 {
-    protected function setData($latitude, $longitude,$distance, $district) {
+    protected function setData($latitude, $longitude, $distance, $district)
+    {
         $statement = $this->connect()->prepare('INSERT INTO Risks (latitude, longitude, distance, district) VALUES (?, ?, ?, ?);');
 
         if (!$statement->execute(array($latitude, $longitude, $distance, $district))) {
@@ -18,14 +19,16 @@ class Data extends Database
 
     }
 
-    public function addBulkData($riskArray) {
+    public function addBulkData($riskArray)
+    {
         for ($i = 1; $i < count($riskArray); $i++) {
             $risk = $riskArray[$i];
             $this->setData($risk->getLat(), $risk->getLon(), $risk->getDistance(), $risk->getDistrict());
         }
     }
 
-    public function getAllRisks() {
+    public function getAllRisks()
+    {
         $statement = $this->connect()->prepare("SELECT * FROM Risks");
         $statement->execute();
 
@@ -39,7 +42,8 @@ class Data extends Database
         return $result;
     }
 
-    public function getAllExtendedRisks() {
+    public function getAllExtendedRisks()
+    {
         $riskArray = $this->getAllRisks();
         $result = [];
 
@@ -48,7 +52,7 @@ class Data extends Database
             $riskLevel = "Unknown";
             if ($risk->getDistance() >= 3) {
                 $riskLevel = "Low";
-            } else if($risk->getDistance() < 3 && $risk->getDistance() > 1) {
+            } else if ($risk->getDistance() < 3 && $risk->getDistance() > 1) {
                 $riskLevel = "Medium";
             } else if ($risk->getDistance() <= 1) {
                 $riskLevel = "High";
@@ -59,7 +63,8 @@ class Data extends Database
         return $result;
     }
 
-    public function getRiskFromDatabase($id):Risk {
+    public function getRiskFromDatabase($id): Risk
+    {
         $statement = $this->connect()->prepare("SELECT * FROM Risks WHERE id=?");
         $statement->execute($id);
 
@@ -71,7 +76,8 @@ class Data extends Database
         return $risk;
     }
 
-    public function getRiskFromDatabaseWithLonLat($lon, $lat):Risk {
+    public function getRiskFromDatabaseWithLonLat($lon, $lat): Risk
+    {
         $statement = $this->connect()->prepare("SELECT * FROM Risks WHERE longitude=? AND lattitude=?");
         $statement->execute(array($lon, $lat));
 
@@ -82,7 +88,9 @@ class Data extends Database
 
         return $risk;
     }
-    public function getNumberRisks() {
+
+    public function getNumberRisks()
+    {
         if (isset($_POST[''])) {
             $statement = $this->connect()->prepare('SELECT COUNT FROM Risks');
             $statement->execute();
@@ -91,41 +99,43 @@ class Data extends Database
 
     //Could all these functions be combined into 1 with an argument?
 
-    public function getRisks($district) {
+    public function getRisks($district)
+    {
         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
         $statement->execute([$district]);
-        return intval($statement->fetch());
-    }
-
-    public function getRisksDumfries() {
-        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district=?;');
-        $statement->execute(["Dumfries"]);
         var_dump($statement->fetch());
         return intval($statement->fetch());
     }
-    public function getRisksCentral() {
-        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Central & Fife"');
-        $statement->execute();
-        return intval($statement->fetch());
-    }
-    public function getRisksGlasgow() {
-        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Glasgow"');
-        $statement->execute();
-        return intval($statement->fetch());
-    }
-    public function getRisksLanark() {
-        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Lanarkshire"');
-        $statement->execute();
-        return intval($statement->fetch());
-    }
-    public function getRisksEdinburgh() {
-        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Edinburgh & Borders"');
-        $statement->execute();
-        return intval($statement->fetch());
-    }
-    public function getRisksAyshire() {
-        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Ayshire & Clyde South"');
-        $statement->execute();
-        return intval($statement->fetch());
-    }
+
+    /*public function getRisksDumfries() {
+         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district=?;');
+         $statement->execute(["Dumfries"]);
+         var_dump($statement->fetch());
+         return intval($statement->fetch());
+     }
+     public function getRisksCentral() {
+         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Central & Fife"');
+         $statement->execute();
+         return intval($statement->fetch());
+     }
+     public function getRisksGlasgow() {
+         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Glasgow"');
+         $statement->execute();
+         return intval($statement->fetch());
+     }
+     public function getRisksLanark() {
+         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Lanarkshire"');
+         $statement->execute();
+         return intval($statement->fetch());
+     }
+     public function getRisksEdinburgh() {
+         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Edinburgh & Borders"');
+         $statement->execute();
+         return intval($statement->fetch());
+     }
+     public function getRisksAyshire() {
+         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Ayshire & Clyde South"');
+         $statement->execute();
+         return intval($statement->fetch());
+     }*/
 }
