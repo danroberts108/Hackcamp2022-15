@@ -1,0 +1,28 @@
+<?php require('template/header.phtml') ?>
+
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<div class="row-fluid">
+    <br>
+    <select name="district">
+        <option>Dumfries</option>
+        <option>Central & Fife</option>
+        <option>Glasgow</option>
+        <option>Lanarkshire</option>
+        <option>Edinburgh & Borders</option>
+        <option>Ayrshire & Clyde South</option>
+    </select>
+</div>
+<br>
+<div>
+    <input type="text" name="resources" placeholder="Resources"/>
+</div>
+<br>
+<div class="span8">
+    <input type="submit" value="Calculate" name="submit" />
+</div>
+</form>
+<?php if (isset($view->result)) : ?>
+    <p><?php echo $view->result; ?></p>
+<?php endif; ?>
+
+<?php require('template/footer.phtml') ?>
