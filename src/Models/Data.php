@@ -3,11 +3,17 @@ require_once("Models/Database.php");
 require_once("Models/Risk.php");
 require_once("Models/ExtendedRisk.php");
 
-class Data extends Database
+class Data
 {
+    private $_db;
+
+    public function __construct() {
+        $this->_db = Database::connect();
+    }
+
     protected function setData($latitude, $longitude, $distance, $district)
     {
-        $statement = $this->connect()->prepare('INSERT INTO Risks (latitude, longitude, distance, district) VALUES (?, ?, ?, ?);');
+        $statement = $this->db->prepare('INSERT INTO Risks (latitude, longitude, distance, district) VALUES (?, ?, ?, ?);');
 
         if (!$statement->execute(array($latitude, $longitude, $distance, $district))) {
             $statement = null;
@@ -29,7 +35,7 @@ class Data extends Database
 
     public function getAllRisks()
     {
-        $statement = $this->connect()->prepare("SELECT * FROM Risks");
+        $statement = $this->db->prepare("SELECT * FROM Risks");
         $statement->execute();
 
         $result = [];
@@ -65,7 +71,7 @@ class Data extends Database
 
     public function getRiskFromDatabase($id): Risk
     {
-        $statement = $this->connect()->prepare("SELECT * FROM Risks WHERE id=?");
+        $statement = $this->_db->prepare("SELECT * FROM Risks WHERE id=?");
         $statement->execute($id);
 
         $result = $statement->fetch();
@@ -78,7 +84,7 @@ class Data extends Database
 
     public function getRiskFromDatabaseWithLonLat($lon, $lat): Risk
     {
-        $statement = $this->connect()->prepare("SELECT * FROM Risks WHERE longitude=? AND lattitude=?");
+        $statement = $this->db->prepare("SELECT * FROM Risks WHERE longitude=? AND lattitude=?");
         $statement->execute(array($lon, $lat));
 
         $result = $statement->fetch();
@@ -91,51 +97,18 @@ class Data extends Database
 
     public function getNumberRisks()
     {
+        //Shouldn't be testing for post values in the class itself - should be before the function is run
         if (isset($_POST[''])) {
-            $statement = $this->connect()->prepare('SELECT COUNT FROM Risks');
+            $statement = $this->db->prepare('SELECT COUNT FROM Risks');
             $statement->execute();
         }
     }
 
-    //Could all these functions be combined into 1 with an argument?
-
-    public function getRisks($district)
+    public function getRisks($district): int
     {
-        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
+        $statement = $this->db->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
         $statement->execute([$district]);
         var_dump($statement->fetch());
         return intval($statement->fetch());
     }
-
-    /*public function getRisksDumfries() {
-         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district=?;');
-         $statement->execute(["Dumfries"]);
-         var_dump($statement->fetch());
-         return intval($statement->fetch());
-     }
-     public function getRisksCentral() {
-         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Central & Fife"');
-         $statement->execute();
-         return intval($statement->fetch());
-     }
-     public function getRisksGlasgow() {
-         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Glasgow"');
-         $statement->execute();
-         return intval($statement->fetch());
-     }
-     public function getRisksLanark() {
-         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Lanarkshire"');
-         $statement->execute();
-         return intval($statement->fetch());
-     }
-     public function getRisksEdinburgh() {
-         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Edinburgh & Borders"');
-         $statement->execute();
-         return intval($statement->fetch());
-     }
-     public function getRisksAyshire() {
-         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Ayshire & Clyde South"');
-         $statement->execute();
-         return intval($statement->fetch());
-     }*/
 }
