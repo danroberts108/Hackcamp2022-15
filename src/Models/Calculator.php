@@ -10,7 +10,7 @@ class Calculator {
     public function __construct($resources, $district) {
         $this->resources = $resources;
         $this->district = $district;
-        $_data = new Data();
+        $this->_data = new Data();
     }
 
     public function calculate() {

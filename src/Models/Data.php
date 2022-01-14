@@ -10,7 +10,6 @@ class Data
     public function __construct() {
         $this->_dbInstance = Database::getInstance();
         $this->_db = $this->_dbInstance->getdbConnection();
-        return $this;
     }
 
     protected function setData($latitude, $longitude, $distance, $district)
