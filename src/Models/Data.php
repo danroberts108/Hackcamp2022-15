@@ -107,6 +107,7 @@ final class Data
         }
     }
 
+    //Returns the number of records (risks) for the specified district
     public function getRisks($district): int
     {
         $statement = $this->_db->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
