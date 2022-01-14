@@ -119,17 +119,17 @@ class Data
     public function getSeparateRisks($district)
     {
         //High Risk
-        $statement = $this->connect()->prepare("SELECT COUNT(*) FROM Risks where distance<=1 AND district =?");
+        $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<=1 AND district =?");
         $statement->execute([$district]);
         $highResult = $statement->fetch();
 
         //Medium Risk
-        $statement = $this->connect()->prepare("SELECT COUNT(*) FROM Risks where distance<=3 AND distance>1 AND district =?");
+        $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<=3 AND distance>1 AND district =?");
         $statement->execute([$district]);
         $medResult = $statement->fetch();
 
         //Low Risk
-        $statement = $this->connect()->prepare("SELECT COUNT(*) FROM Risks where distance>=3 AND district =?");
+        $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance>=3 AND district =?");
         $statement->execute([$district]);
         $lowResult = $statement->fetch();
 
@@ -182,6 +182,6 @@ class Data
             $risks[] = $risk;
         }
 
-        $fp = $this->csvParse->getCsvFromRisks($risks);
+        //$fp = $this->csvParse->getCsvFromRisks($risks);
     }
 }
