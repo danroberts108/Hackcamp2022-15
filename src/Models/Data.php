@@ -4,7 +4,7 @@ require_once("Models/Risk.php");
 require_once("Models/ExtendedRisk.php");
 require_once("Models/CsvParsing.php");
 
-class Data
+final class Data
 {
     protected $_db, $_dbInstance, $csvParse;
 

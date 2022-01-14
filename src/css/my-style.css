@@ -41,7 +41,7 @@
     height: 150px;
 }
 
-.upload-container{
+.form-container{
     padding: 2rem 7rem;
 }
 
@@ -51,10 +51,14 @@
     border-bottom:black;
 }
 
-.page-title {
+.page-title, .form-text-centre {
     text-align: center;
 }
 
 .top-pad {
     padding-top: 3rem;
+}
+
+.label-lg {
+    font-size: 1.5rem;
 }
