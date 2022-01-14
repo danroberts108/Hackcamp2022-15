@@ -5,10 +5,12 @@ require_once("Models/ExtendedRisk.php");
 
 class Data
 {
-    private $_db;
+    protected $_db, $_dbInstance;
 
     public function __construct() {
-        $this->_db = Database::connect();
+        $this->_dbInstance = Database::getInstance();
+        $this->_db = $this->_dbInstance->getdbConnection();
+        return $this;
     }
 
     protected function setData($latitude, $longitude, $distance, $district)

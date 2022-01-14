@@ -1,37 +1,41 @@
 <?php
 
-class Calculator extends Data {
+require_once("Models/Data.php");
 
-    var $resources = 0, $district = '';
+class Calculator {
+
+    protected $resources = 0, $district = '';
+    protected Data $_data;
 
     public function __construct($resources, $district) {
         $this->resources = $resources;
         $this->district = $district;
-
+        $_data = new Data();
     }
 
     public function calculate() {
         if (is_numeric($this->resources) && $this->district = 'Dumfries') {
-            $result = ceil($this->getRisks("Dumfries") / $this->resources);
+            $result = ceil($this->_data->getRisks("Dumfries") / $this->resources);
         }
         elseif (is_numeric($this->resources) && $this->district = 'Central & Fife') {
-            $result = ceil($this->getRisks("Central & Fife") / $this->resources);
+            $result = ceil($this->_data->getRisks("Central & Fife") / $this->resources);
         }
         elseif (is_numeric($this->resources) && $this->district = 'Glasgow') {
-            $result = ceil($this->getRisks("Glasgow") / $this->resources);
+            $result = ceil($this->_data->getRisks("Glasgow") / $this->resources);
         }
         elseif (is_numeric($this->resources) && $this->district = 'Lanarkshire') {
-            $result = ceil($this->getRisks("Lanarkshire") / $this->resources);
+            $result = ceil($this->_data->getRisks("Lanarkshire") / $this->resources);
         }
         elseif (is_numeric($this->resources) && $this->district = 'Edinburgh & Borders') {
-            $result = ceil($this->getRisks("Edinburgh & Borders") / $this->resources);
+            $result = ceil($this->_data->getRisks("Edinburgh & Borders") / $this->resources);
         }
         elseif (is_numeric($this->resources) && $this->district = 'Ayrshire & Clyde South') {
-            $result = ceil($this->getRisks("Ayshire & Clyde South") / $this->resources);
+            $result = ceil($this->_data->getRisks("Ayshire & Clyde South") / $this->resources);
         }
         else {
             $result = false;
         }
+
         return $result;
     }
 
