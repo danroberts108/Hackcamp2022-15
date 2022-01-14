@@ -1,39 +1,44 @@
 <?php require('template/header.phtml') ?>
 
 
-<div></div>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
+<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row">
+        <!--Pie Chart  -->
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
 
-        function drawChart() {
+            function drawChart() {
+                //Define Chart
+                var data = google.visualization.arrayToDataTable([
+                    ['Risks', 'Percentage'],
+                    //['High Risk', '<?php //echo $view->highRisk ;?>//'],
+                    //['Medium Risk', '<?php //echo $view->medRisk ;?>//'],
+                    //['Low Risk', '<?php //echo $view->lowRisk ;?>//']
+                    ['High Risk', <?php echo $view->highRisk ;?>],
+                    ['Medium Risk', <?php echo $view->medRisk ;?>],
+                    ['Low Risk', <?php echo $view->lowRisk ;?>]
+                ]);
 
-            var data = google.visualization.arrayToDataTable([
-                ['district', 'distance']
-                <?php
-                $database = new Database();
-                $statement = $database->connect()->prepare("SELECT * FROM Risks");
-                $statement->execute();
-                while ($result = $statement->fetch()) {
-                    echo"['".$result['district']."','".$result['distance']."']";
-                }
-                ?>
-            ]);
+                var options = {
+                    title: 'Global Risks',
+                    colors: ['red','orange','yellow'],
+                    pieSliceTextStyle: {
+                        color: 'black'
+                    }
+                };
 
-            var options = {
-                title: 'My Daily Activities'
-            };
+                //Instantiate and draw Chart
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                chart.draw(data, options);
+            }
+        </script>
+        <div id="piechart" style="width: 900px; height: 500px;">
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-            chart.draw(data, options);
-        }
-    </script>
+        </div>
+    </div>
 </div>
-<body>
-<div id="piechart" style="width: 900px; height: 500px;"></div>
-</body>
+
 
 
 

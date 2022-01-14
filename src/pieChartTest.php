@@ -5,7 +5,7 @@
 //require_once("Models/CsvParsing.php");
 
 $view = new stdClass();
-$view->pageTitle = 'pieChart';
+$view->pageTitle = 'Pie Chart';
 
 $view->highRiskPercentage = 67.5;
 $view->medRiskPercentage = 12.5;
