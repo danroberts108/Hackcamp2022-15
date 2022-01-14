@@ -1,5 +1,4 @@
 <?php
-require_once("Models/DataControl.php");
 require_once("Models/Risk.php");
 require_once("Models/CsvParsing.php");
 $view = new stdClass();
