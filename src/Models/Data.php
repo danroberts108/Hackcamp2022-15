@@ -2,12 +2,21 @@
 require_once("Models/Database.php");
 require_once("Models/Risk.php");
 require_once("Models/ExtendedRisk.php");
+require_once("Models/CsvParsing.php");
 
-class Data extends Database
+class Data
 {
+    protected $_db, $_dbInstance, $csvParse;
+
+    public function __construct() {
+        $this->_dbInstance = Database::getInstance();
+        $this->_db = $this->_dbInstance->getdbConnection();
+        $this->csvParse = new CsvParsing();
+    }
+
     protected function setData($latitude, $longitude, $distance, $district)
     {
-        $statement = $this->connect()->prepare('INSERT INTO Risks (latitude, longitude, distance, district) VALUES (?, ?, ?, ?);');
+        $statement = $this->_db->prepare('INSERT INTO Risks (latitude, longitude, distance, district) VALUES (?, ?, ?, ?);');
 
         if (!$statement->execute(array($latitude, $longitude, $distance, $district))) {
             $statement = null;
@@ -29,7 +38,7 @@ class Data extends Database
 
     public function getAllRisks()
     {
-        $statement = $this->connect()->prepare("SELECT * FROM Risks");
+        $statement = $this->_db->prepare("SELECT * FROM Risks");
         $statement->execute();
 
         $result = [];
@@ -65,7 +74,7 @@ class Data extends Database
 
     public function getRiskFromDatabase($id): Risk
     {
-        $statement = $this->connect()->prepare("SELECT * FROM Risks WHERE id=?");
+        $statement = $this->_db->prepare("SELECT * FROM Risks WHERE id=?");
         $statement->execute($id);
 
         $result = $statement->fetch();
@@ -78,7 +87,7 @@ class Data extends Database
 
     public function getRiskFromDatabaseWithLonLat($lon, $lat): Risk
     {
-        $statement = $this->connect()->prepare("SELECT * FROM Risks WHERE longitude=? AND lattitude=?");
+        $statement = $this->_db->prepare("SELECT * FROM Risks WHERE longitude=? AND lattitude=?");
         $statement->execute(array($lon, $lat));
 
         $result = $statement->fetch();
@@ -91,20 +100,19 @@ class Data extends Database
 
     public function getNumberRisks()
     {
+        //Shouldn't be testing for post values in the class itself - should be before the function is run
         if (isset($_POST[''])) {
-            $statement = $this->connect()->prepare('SELECT COUNT FROM Risks');
+            $statement = $this->_db->prepare('SELECT COUNT FROM Risks');
             $statement->execute();
         }
     }
 
-    //Could all these functions be combined into 1 with an argument?
-
-    public function getRisks($district)
+    public function getRisks($district): int
     {
-        $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
+        $statement = $this->_db->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
         $statement->execute([$district]);
-        var_dump($statement->fetch());
-        return intval($statement->fetch());
+        $result = $statement->fetch();
+        return intval($result[0]);
     }
 
     //Used to construct the pie charts by getting the percentages of risks for the specified district
@@ -165,4 +173,15 @@ class Data extends Database
          $statement->execute();
          return intval($statement->fetch());
      }*/
+    public function getRisksDatabaseCsv() {
+        $statement = $this->_db->prepare('SELECT latitude, longitude, distance, district FROM Risks');
+        $statement->execute();
+        $risks = [];
+        while($row = $statement->fetch()) {
+            $risk = new Risk($row['latitude'], $row['longitude'], $row['distance'], $row['district']);
+            $risks[] = $risk;
+        }
+
+        $fp = $this->csvParse->getCsvFromRisks($risks);
+    }
 }

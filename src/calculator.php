@@ -1,7 +1,6 @@
 <?php
 require('Models/Database.php');
 require('Models/Data.php');
-require('Models/DataControl.php');
 require('Models/Calculator.php');
 
 $view = new stdClass();
