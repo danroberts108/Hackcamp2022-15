@@ -119,17 +119,17 @@ class Data
     public function getSeparateRisks($district)
     {
         //High Risk
-        $statement = $this->connect()->prepare("SELECT COUNT(*) FROM Risks where distance<=1 AND district =?");
+        $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<=1 AND district =?");
         $statement->execute([$district]);
         $highResult = $statement->fetch();
 
         //Medium Risk
-        $statement = $this->connect()->prepare("SELECT COUNT(*) FROM Risks where distance<=3 AND distance>1 AND district =?");
+        $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<=3 AND distance>1 AND district =?");
         $statement->execute([$district]);
         $medResult = $statement->fetch();
 
         //Low Risk
-        $statement = $this->connect()->prepare("SELECT COUNT(*) FROM Risks where distance>=3 AND district =?");
+        $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance>=3 AND district =?");
         $statement->execute([$district]);
         $lowResult = $statement->fetch();
 
@@ -142,37 +142,6 @@ class Data
         return $values;
     }
 
-    /*public function getRisksDumfries() {
-         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district=?;');
-         $statement->execute(["Dumfries"]);
-         var_dump($statement->fetch());
-         return intval($statement->fetch());
-     }
-     public function getRisksCentral() {
-         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Central & Fife"');
-         $statement->execute();
-         return intval($statement->fetch());
-     }
-     public function getRisksGlasgow() {
-         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Glasgow"');
-         $statement->execute();
-         return intval($statement->fetch());
-     }
-     public function getRisksLanark() {
-         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Lanarkshire"');
-         $statement->execute();
-         return intval($statement->fetch());
-     }
-     public function getRisksEdinburgh() {
-         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Edinburgh & Borders"');
-         $statement->execute();
-         return intval($statement->fetch());
-     }
-     public function getRisksAyshire() {
-         $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district="Ayshire & Clyde South"');
-         $statement->execute();
-         return intval($statement->fetch());
-     }*/
     public function getRisksDatabaseCsv() {
         $statement = $this->_db->prepare('SELECT latitude, longitude, distance, district FROM Risks');
         $statement->execute();
@@ -182,6 +151,6 @@ class Data
             $risks[] = $risk;
         }
 
-        $fp = $this->csvParse->getCsvFromRisks($risks);
+        $this->csvParse->getCsvFromRisks($risks);
     }
 }
