@@ -20,7 +20,7 @@ $view->districts = array("Dumfries",
                         "Edinburgh & Borders",
                         "Ayrshire & Clyde South" );
 
-//chart object is called from riskcharts.phtml which runs the getSeperateRisks method
+//chart object is called from piecharts.phtml which runs the getSeperateRisks method
 $view->chart = new Chart();
 
-require_once('Views/riskcharts.phtml');
+require_once('Views/piecharts.phtml');
