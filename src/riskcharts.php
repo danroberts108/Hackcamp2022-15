@@ -20,7 +20,7 @@ $view->districts = array("Dumfries",
                         "Edinburgh & Borders",
                         "Ayrshire & Clyde South" );
 
-//chart object is called from lawrencepie.phtml which runs the getSeperateRisks method
+//chart object is called from riskcharts.phtml which runs the getSeperateRisks method
 $view->chart = new Chart();
 
-require_once('Views/lawrencepie.phtml');
+require_once('Views/riskcharts.phtml');
