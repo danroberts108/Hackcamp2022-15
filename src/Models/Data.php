@@ -13,7 +13,7 @@ class Data
 
     protected function setData($latitude, $longitude, $distance, $district)
     {
-        $statement = $this->db->prepare('INSERT INTO Risks (latitude, longitude, distance, district) VALUES (?, ?, ?, ?);');
+        $statement = $this->_db->prepare('INSERT INTO Risks (latitude, longitude, distance, district) VALUES (?, ?, ?, ?);');
 
         if (!$statement->execute(array($latitude, $longitude, $distance, $district))) {
             $statement = null;
@@ -35,7 +35,7 @@ class Data
 
     public function getAllRisks()
     {
-        $statement = $this->db->prepare("SELECT * FROM Risks");
+        $statement = $this->_db->prepare("SELECT * FROM Risks");
         $statement->execute();
 
         $result = [];
@@ -84,7 +84,7 @@ class Data
 
     public function getRiskFromDatabaseWithLonLat($lon, $lat): Risk
     {
-        $statement = $this->db->prepare("SELECT * FROM Risks WHERE longitude=? AND lattitude=?");
+        $statement = $this->_db->prepare("SELECT * FROM Risks WHERE longitude=? AND lattitude=?");
         $statement->execute(array($lon, $lat));
 
         $result = $statement->fetch();
@@ -99,14 +99,14 @@ class Data
     {
         //Shouldn't be testing for post values in the class itself - should be before the function is run
         if (isset($_POST[''])) {
-            $statement = $this->db->prepare('SELECT COUNT FROM Risks');
+            $statement = $this->_db->prepare('SELECT COUNT FROM Risks');
             $statement->execute();
         }
     }
 
     public function getRisks($district): int
     {
-        $statement = $this->db->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
+        $statement = $this->_db->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
         $statement->execute([$district]);
         var_dump($statement->fetch());
         return intval($statement->fetch());
