@@ -51,6 +51,10 @@
     border-bottom:black;
 }
 
+.page-title {
+    text-align: center;
+}
+
 .top-pad {
     padding-top: 3rem;
 }

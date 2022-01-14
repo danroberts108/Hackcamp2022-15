@@ -2,14 +2,16 @@
 require_once("Models/Database.php");
 require_once("Models/Risk.php");
 require_once("Models/ExtendedRisk.php");
+require_once("Models/CsvParsing.php");
 
 class Data
 {
-    protected $_db, $_dbInstance;
+    protected $_db, $_dbInstance, $csvParse;
 
     public function __construct() {
         $this->_dbInstance = Database::getInstance();
         $this->_db = $this->_dbInstance->getdbConnection();
+        $this->csvParse = new CsvParsing();
     }
 
     protected function setData($latitude, $longitude, $distance, $district)
@@ -111,5 +113,17 @@ class Data
         $statement->execute([$district]);
         $result = $statement->fetch();
         return intval($result[0]);
+    }
+
+    public function getRisksDatabaseCsv() {
+        $statement = $this->_db->prepare('SELECT latitude, longitude, distance, district FROM Risks');
+        $statement->execute();
+        $risks = [];
+        while($row = $statement->fetch()) {
+            $risk = new Risk($row['latitude'], $row['longitude'], $row['distance'], $row['district']);
+            $risks[] = $risk;
+        }
+
+        $fp = $this->csvParse->getCsvFromRisks($risks);
     }
 }
