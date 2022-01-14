@@ -109,7 +109,7 @@ class Data
     {
         $statement = $this->_db->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
         $statement->execute([$district]);
-        var_dump($statement->fetch());
-        return intval($statement->fetch());
+        $result = $statement->fetch();
+        return intval($result[0]);
     }
 }
