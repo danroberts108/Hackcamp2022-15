@@ -13,7 +13,7 @@ if(isset($_POST['submit'])) {
         $view->result = 'not a valid number.';
     }
     else {
-        $view->result = 'the answer is ' . $result . ' days.';
+        $view->result = $result . ' days.';
     }
 }
 require_once('Views/calculator.phtml');

@@ -1,28 +1,64 @@
 <?php require('template/header.phtml') ?>
 
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-<div class="row-fluid">
+<div class="row page-header">
+    <h1 class="page-title">Calculator</h1>
+</div>
+<!--<form action="<?php /*echo $_SERVER['PHP_SELF']; */?>" method="post">
+    <div class="row-fluid">
+        <br>
+        <select name="district">
+            <option>Dumfries</option>
+            <option>Central & Fife</option>
+            <option>Glasgow</option>
+            <option>Lanarkshire</option>
+            <option>Edinburgh & Borders</option>
+            <option>Ayrshire & Clyde South</option>
+        </select>
+    </div>
     <br>
-    <select name="district">
-        <option>Dumfries</option>
-        <option>Central & Fife</option>
-        <option>Glasgow</option>
-        <option>Lanarkshire</option>
-        <option>Edinburgh & Borders</option>
-        <option>Ayrshire & Clyde South</option>
-    </select>
+    <div>
+        <input type="text" name="resources" placeholder="Resources"/>
+    </div>
+    <br>
+    <div class="span8">
+        <input type="submit" value="Calculate" name="submit" />
+    </div>
+</form>-->
+<div class="row">
+    <div class="col-4">
+        <form method="post">
+            <div class="mb-3">
+                <label for="district">District</label>
+                <select class="form-select" name="district">
+                    <option selected>District</option>
+                    <option>Dumfries</option>
+                    <option>Central & Fife</option>
+                    <option>Glasgow</option>
+                    <option>Lanarkshire</option>
+                    <option>Edinburgh & Borders</option>
+                    <option>Ayrshire & Clyde South</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="resources" class="form-label">Resources</label>
+                <input type="number" name="resources" placeholder="Resources" class="form-control" />
+            </div>
+            <button class="btn btn-primary" type="submit" name="submit">Calculate</button>
+        </form>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-4">
+        <form style="padding-top: 5rem;">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Time:</span>
+                <input type="text" class="form-control" placeholder="Time" value="<?php if (isset($view->result)){echo $view->result;} ?>" disabled>
+            </div>
+        </form>
+    </div>
+    <div class="col-2"></div>
 </div>
-<br>
-<div>
-    <input type="text" name="resources" placeholder="Resources"/>
-</div>
-<br>
-<div class="span8">
-    <input type="submit" value="Calculate" name="submit" />
-</div>
-</form>
-<?php if (isset($view->result)) : ?>
+<!--<?php if (isset($view->result)) : ?>
     <p><?php echo $view->result; ?></p>
-<?php endif; ?>
+<?php endif; ?>-->
 
 <?php require('template/footer.phtml') ?>
