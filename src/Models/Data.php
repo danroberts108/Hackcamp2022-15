@@ -107,6 +107,33 @@ class Data extends Database
         return intval($statement->fetch());
     }
 
+    //Used to construct the pie charts by getting the percentages of risks for the specified district
+    public function getSeparateRisks($district)
+    {
+        //High Risk
+        $statement = $this->connect()->prepare("SELECT COUNT(*) FROM Risks where distance<=1 AND district =?");
+        $statement->execute([$district]);
+        $highResult = $statement->fetch();
+
+        //Medium Risk
+        $statement = $this->connect()->prepare("SELECT COUNT(*) FROM Risks where distance<=3 AND distance>1 AND district =?");
+        $statement->execute([$district]);
+        $medResult = $statement->fetch();
+
+        //Low Risk
+        $statement = $this->connect()->prepare("SELECT COUNT(*) FROM Risks where distance>=3 AND district =?");
+        $statement->execute([$district]);
+        $lowResult = $statement->fetch();
+
+        $values = array($highResult,
+                        $medResult,
+                        $lowResult );
+
+        //var_dump($values);
+
+        return $values;
+    }
+
     /*public function getRisksDumfries() {
          $statement = $this->connect()->prepare('SELECT COUNT(*) FROM Risks WHERE district=?;');
          $statement->execute(["Dumfries"]);
