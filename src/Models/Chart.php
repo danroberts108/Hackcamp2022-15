@@ -11,8 +11,8 @@ class Chart
 
 
     public function calculateChart($district) {
-        //this function will be called from lawrencepie.phtml
-        //it gets the percentage of each type of risk to be returned as an array to lawrencepie.phtml
+        //this function will be called from piecharts.phtml
+        //it gets the percentage of each type of risk to be returned as an array to piecharts.phtml
 
         $values = $this->data->getSeparateRisks($district);
         //echo "[NEXT CHART]";

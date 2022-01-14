@@ -112,8 +112,8 @@ final class Data
     {
         $statement = $this->_db->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
         $statement->execute([$district]);
-        $result = $statement->fetch();
-        return intval($result[0]);
+        var_dump($statement->fetch());
+        return intval($statement->fetch());
     }
 
     //Used to construct the pie charts by getting the percentages of risks for the specified district
