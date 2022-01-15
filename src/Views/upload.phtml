@@ -1,35 +1,10 @@
 <?php require('template/header.phtml') ?>
 
-<!--<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">-->
 <div>
     <div class="row page-header">
         <h1 class="page-title">Upload Data</h1>
     </div>
-
-    <!--<div class="row" style="height:5vw;">
-    </div>
-    <div class="row">
-        <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
-        </div>
-        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-            <form action="../upload.php" method="post" enctype="multipart/form-data">
-                <div class="row">
-                    <p>files must be of .csv format<p>
-                </div>
-                <div class="row">
-                    <input type="file" name="chosenFile" accept="text/csv">
-                </div>
-                <div class="row" style="height:5vw;">
-                </div>
-                <div class="row">
-                    <input type="submit" name="submit" style="width:50%;">
-                </div>
-            </form>
-        </div>
-        <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
-        </div>
-    </div>-->
-    <div class="upload-container">
+    <div class="form-container">
         <form action="../upload.php" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="chosenFile" class="form-label">Risk file (csv)</label>

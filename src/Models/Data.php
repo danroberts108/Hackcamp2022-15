@@ -4,7 +4,7 @@ require_once("Models/Risk.php");
 require_once("Models/ExtendedRisk.php");
 require_once("Models/CsvParsing.php");
 
-class Data
+final class Data
 {
     protected $_db, $_dbInstance, $csvParse;
 
@@ -107,12 +107,13 @@ class Data
         }
     }
 
+    //Returns the number of records (risks) for the specified district
     public function getRisks($district): int
     {
         $statement = $this->_db->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
         $statement->execute([$district]);
-        $result = $statement->fetch();
-        return intval($result[0]);
+        var_dump($statement->fetch());
+        return intval($statement->fetch());
     }
 
     //Used to construct the pie charts by getting the percentages of risks for the specified district

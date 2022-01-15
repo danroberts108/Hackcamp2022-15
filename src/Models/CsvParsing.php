@@ -37,6 +37,7 @@ class CsvParsing {
         }
         fclose($fp);
 
+        //Sets parameters for the csv file and sends it to the user.
         header('Content-Description: File Transfer');
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename=' . $filename . '.csv');

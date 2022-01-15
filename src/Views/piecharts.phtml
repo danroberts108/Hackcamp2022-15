@@ -1,6 +1,8 @@
 <?php require('template/header.phtml') ?>
 
-
+<div class="row page-header">
+    <h1 class="page-title">Risk Charts</h1>
+</div>
 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <div class="row">
         <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
@@ -18,6 +20,9 @@
                 //Define Chart
                 var data = google.visualization.arrayToDataTable([
                     ['Risks', 'Percentage'],
+                    //['High Risk', '<?php //echo $view->highRisk ;?>//'],
+                    //['Medium Risk', '<?php //echo $view->medRisk ;?>//'],
+                    //['Low Risk', '<?php //echo $view->lowRisk ;?>//']
                     ['High Risk', <?php echo $view->highRisk ;?>],
                     ['Medium Risk', <?php echo $view->medRisk ;?>],
                     ['Low Risk', <?php echo $view->lowRisk ;?>]
@@ -49,7 +54,8 @@
 
     <div class='row'>
         <?php
-
+        //Output buffer used for efficiency with a lot of echos
+        ob_start();
         foreach($view->districts as $district) {
             //use method in Chart to find the risk percentage values of the current district
             //Then update values for each chart to be called in javascript below
@@ -61,7 +67,6 @@
             //echo "[MED RISK: ".$view->medRisk."]";
             $view->lowRisk = intval($values[2]);
             //echo "[LOW RISK: ".$view->lowRisk."]";
-
             //Creates a pie chart for each district - here is the issue, the pie charts won't appear
             echo "<div class ='col-sm-6 col-md-6 col-lg-6 col-xl-6'>";
             echo    "<div id='".$district."Chart'>";
@@ -94,7 +99,9 @@
             echo        "</script>";
             echo    "</div>";
             echo "</div>";
-        } ?>
+        }
+        ob_end_flush();
+        ?>
     </div>
 </div>
 
