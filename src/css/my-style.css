@@ -59,6 +59,18 @@
     padding-top: 3rem;
 }
 
+.bottom-pad {
+    padding-bottom: 3rem;
+}
+
 .label-lg {
     font-size: 1.5rem;
+}
+
+.li-button-text {
+    text-align: center;
+}
+
+.mono-size {
+    height: 10rem;
 }
