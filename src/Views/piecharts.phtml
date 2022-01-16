@@ -23,9 +23,9 @@
                     //['High Risk', '<?php //echo $view->highRisk ;?>//'],
                     //['Medium Risk', '<?php //echo $view->medRisk ;?>//'],
                     //['Low Risk', '<?php //echo $view->lowRisk ;?>//']
-                    ['High Risk', <?php echo $view->highRisk ;?>],
-                    ['Medium Risk', <?php echo $view->medRisk ;?>],
-                    ['Low Risk', <?php echo $view->lowRisk ;?>]
+                    ['High Risk', <?php echo intval($view->highRisk);?>],
+                    ['Medium Risk', <?php echo intval($view->medRisk);?>],
+                    ['Low Risk', <?php echo intval($view->lowRisk);?>]
                 ]);
 
                 var options = {
@@ -61,13 +61,13 @@
             //Then update values for each chart to be called in javascript below
             $values = $view->chart->calculateChart($district);
             //echo "[DISTRICT:".$district."]";
-            $view->highRisk = intval($values[0]);
+            $view->highRisk = intval($values[0]["COUNT(*)"]);
             //echo "[HIGH RISK: ".$view->highRisk."]";
-            $view->medRisk = intval($values[1]);
+            $view->medRisk = intval($values[1]["COUNT(*)"]);
             //echo "[MED RISK: ".$view->medRisk."]";
-            $view->lowRisk = intval($values[2]);
+            $view->lowRisk = intval($values[2]["COUNT(*)"]);
             //echo "[LOW RISK: ".$view->lowRisk."]";
-            //Creates a pie chart for each district - here is the issue, the pie charts won't appear
+            //Creates a pie chart for the current district
             echo "<div class ='col-sm-6 col-md-6 col-lg-6 col-xl-6'>";
             echo    "<div id='".$district."Chart'>";
             echo        "<script type='text/javascript'>";

@@ -119,24 +119,43 @@ final class Data
     //Used to construct the pie charts by getting the percentages of risks for the specified district
     public function getSeparateRisks($district)
     {
-        //High Risk
-        $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<=1 AND district =?");
-        $statement->execute([$district]);
-        $highResult = $statement->fetch();
+        if($district=='global'){
+            //High Risk
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<=1");
+            $statement->execute();
+            $highResult = $statement->fetch();
 
-        //Medium Risk
-        $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<=3 AND distance>1 AND district =?");
-        $statement->execute([$district]);
-        $medResult = $statement->fetch();
+            //Medium Risk
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<=3 AND distance>1");
+            $statement->execute();
+            $medResult = $statement->fetch();
 
-        //Low Risk
-        $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance>=3 AND district =?");
-        $statement->execute([$district]);
-        $lowResult = $statement->fetch();
+            //Low Risk
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance>=3");
+            $statement->execute();
+            $lowResult = $statement->fetch();
+        }
 
+        else {
+
+            //High Risk
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<=1 AND district =?");
+            $statement->execute([$district]);
+            $highResult = $statement->fetch();
+
+            //Medium Risk
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<=3 AND distance>1 AND district =?");
+            $statement->execute([$district]);
+            $medResult = $statement->fetch();
+
+            //Low Risk
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance>=3 AND district =?");
+            $statement->execute([$district]);
+            $lowResult = $statement->fetch();
+        }
         $values = array($highResult,
-                        $medResult,
-                        $lowResult );
+            $medResult,
+            $lowResult);
 
         //var_dump($values);
 
