@@ -1,3 +1,69 @@
 <?php require('template/header.phtml') ?>
 
+<div class="row page-header">
+    <h1 class="page-title">Home</h1>
+</div>
+<div class="row top-pad">
+    <div class="col">
+        <div class="card mono-size">
+            <div class="card-body">
+                <h5 class="card-title">Upload CSV</h5>
+                <p class="card-text">Upload a CSV risks file into the database</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <a href="upload.html" class="list-group-item list-group-item-action list-group-flush li-button-text list-group-item-primary">Upload CSV</a>
+            </ul>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mono-size">
+            <div class="card-body">
+                <h5 class="card-title">Data Table</h5>
+                <p class="card-text">View current risk data in table format</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <a href="dataTable.php" class="list-group-item list-group-item-action list-group-flush li-button-text list-group-item-primary">View Data Table</a>
+            </ul>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mono-size">
+            <div class="card-body">
+                <h5 class="card-title">Mitigation Time Calculator</h5>
+                <p class="card-text">Calculate the required time to mitigate risks in an area with the given resources</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <a href="calculator.php" class="list-group-item list-group-item-action list-group-flush li-button-text list-group-item-primary">Calculator</a>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row top-pad bottom-pad">
+    <div class="col-1"></div>
+    <div class="col">
+        <div class="card mono-size">
+            <div class="card-body">
+                <h5 class="card-title">Risk Charts</h5>
+                <p class="card-text">View risk information in chart format to better understand and quantify the data</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <a href="piecharts.php" class="list-group-item list-group-item-action list-group-flush li-button-text list-group-item-primary">Pie Charts</a>
+            </ul>
+        </div>
+    </div>
+    <div class="col-1"></div>
+    <div class="col">
+        <div class="card mono-size">
+            <div class="card-body">
+                <h5 class="card-title">Export Risks CSV</h5>
+                <p class="card-text">Export all current risks as a csv file</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <a href="exportcsv.php" class="list-group-item list-group-item-action list-group-flush li-button-text list-group-item-primary">Export CSV</a>
+            </ul>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+
 <?php require('template/footer.phtml') ?>
