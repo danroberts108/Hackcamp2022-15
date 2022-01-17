@@ -4,7 +4,7 @@ let map, heatmap;
 
 function initMap() {
     const mapOptions = {
-        zoom: 5.5,
+        zoom: 6,
         center: {lat: 56.073156, lng: -4.011995},
         mapTypeId: 'satellite'
     };

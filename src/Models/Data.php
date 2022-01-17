@@ -30,6 +30,8 @@ final class Data
 
     public function addBulkData($riskArray)
     {
+        $statement = $this->_db->prepare("DELETE * FROM Risks");
+        $statement->execute();
         for ($i = 1; $i < count($riskArray); $i++) {
             $risk = $riskArray[$i];
             $this->setData($risk->getLat(), $risk->getLon(), $risk->getDistance(), $risk->getDistrict());
