@@ -116,6 +116,82 @@ final class Data
         return intval($statement->fetch());
     }
 
+    public function lawrence($risk) {
+        if($risk=='all'){
+            //Dumfries
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='dumfries'");
+            $statement->execute([$risk]);
+            $dumfries = $statement->fetch();
+
+            //Central
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='central'");
+            $statement->execute([$risk]);
+            $central = $statement->fetch();
+
+            //Glasgow
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='central'");
+            $statement->execute([$risk]);
+            $glasgow = $statement->fetch();
+
+            //Lanarkshire
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='lanarkshire'");
+            $statement->execute([$risk]);
+            $lanarkshire = $statement->fetch();
+
+            //Edinburgh
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='edinburgh'");
+            $statement->execute([$risk]);
+            $edinburgh = $statement->fetch();
+
+            //Ayrshire
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='ayrshire'");
+            $statement->execute([$risk]);
+            $ayrshire = $statement->fetch();
+        }
+        else {
+            //Dumfries
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='dumfries'");
+            $statement->execute([$risk]);
+            $dumfries = $statement->fetch();
+
+            //Central
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='central'");
+            $statement->execute([$risk]);
+            $central = $statement->fetch();
+
+            //Glasgow
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='central'");
+            $statement->execute([$risk]);
+            $glasgow = $statement->fetch();
+
+            //Lanarkshire
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='lanarkshire'");
+            $statement->execute([$risk]);
+            $lanarkshire = $statement->fetch();
+
+            //Edinburgh
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='edinburgh'");
+            $statement->execute([$risk]);
+            $edinburgh = $statement->fetch();
+
+            //Ayrshire
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='ayrshire'");
+            $statement->execute([$risk]);
+            $ayrshire = $statement->fetch();
+        }
+
+        $values = array($dumfries,
+            $central,
+            $glasgow,
+            $lanarkshire,
+            $edinburgh,
+            $ayrshire);
+
+        //var_dump($values);
+
+        return $values;
+    }
+
     //Used to construct the pie charts by getting the percentages of risks for the specified district
     public function getSeparateRisks($district)
     {

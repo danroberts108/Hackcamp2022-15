@@ -18,6 +18,15 @@ class Chart
         //var_dump($values);
         return ($values);
     }
+
+    public function calculateChart2($risk) {
+        //this function will be called from piecharts.phtml
+        //it gets the percentage of each type of districts to be returned as an array to piecharts.phtml
+        $values = $this->data->lawrence($risk);
+        //echo "[NEXT CHART]";
+        //var_dump($values);
+        return ($values);
+    }
 //
 //
 //    public function getAllRisks()
