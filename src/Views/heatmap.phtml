@@ -6,62 +6,85 @@
 
 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <div class="row">
-        <script type="text/javascript">
-            var map, heatmap;
 
-            function initMap() {
-                map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 13,
-                    center: {lat: 32.8294, lng: -96.7196},
-                    mapTypeId: google.maps.MapTypeId.SATELLITE
-                });
+        <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+
+        </div>
+
+        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+            <div id="floating-panel">
+                <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+                <button onclick="changeGradient()">Change gradient</button>
+                <button onclick="changeRadius()">Change radius</button>
+                <button onclick="changeOpacity()">Change opacity</button>
+            </div>
+            <div id="map" style="height:100%;">
+
+            </div>
+
+            <script type="text/javascript">
+
+                let map, heatmap;
+
+                let mapOptions = {
+                    zoom: 13
+                    center: {lat: 56.073156, lng: -4.011995}
+                    mapTypeId: 'satellite'
+                };
+
+                map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
                 heatmap = new google.maps.visualization.HeatmapLayer({
                     data: getPoints(),
                     map: map
                 });
-            }
 
-            function toggleHeatmap() {
-                heatmap.setMap(heatmap.getMap() ? null : map);
-            }
 
-            function changeGradient() {
-                var gradient = [
-                    'rgba(0, 255, 255, 0)',
-                    'rgba(0, 255, 255, 1)',
-                    'rgba(0, 191, 255, 1)',
-                    'rgba(0, 127, 255, 1)',
-                    'rgba(0, 63, 255, 1)',
-                    'rgba(0, 0, 255, 1)',
-                    'rgba(0, 0, 223, 1)',
-                    'rgba(0, 0, 191, 1)',
-                    'rgba(0, 0, 159, 1)',
-                    'rgba(0, 0, 127, 1)',
-                    'rgba(63, 0, 91, 1)',
-                    'rgba(127, 0, 63, 1)',
-                    'rgba(191, 0, 31, 1)',
-                    'rgba(255, 0, 0, 1)'
-                ]
+                function toggleHeatMap() {
+                    heatmap.setMap(heatmap.getMap() ? null : map);
+                }
+
+                function changeGradient() {
+                    var gradient = [
+                        'rgba(0, 255, 255, 0)',
+                        'rgba(0, 255, 255, 1)',
+                        'rgba(0, 191, 255, 1)',
+                        'rgba(0, 127, 255, 1)',
+                        'rgba(0, 63, 255, 1)',
+                        'rgba(0, 0, 255, 1)',
+                        'rgba(0, 0, 223, 1)',
+                        'rgba(0, 0, 191, 1)',
+                        'rgba(0, 0, 159, 1)',
+                        'rgba(0, 0, 127, 1)',
+                        'rgba(63, 0, 91, 1)',
+                        'rgba(127, 0, 63, 1)',
+                        'rgba(191, 0, 31, 1)',
+                        'rgba(255, 0, 0, 1)'
+                    ]
+                }
                 heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-            }
 
-            function changeRadius() {
-                heatmap.set('radius', heatmap.get('radius') ? null : 20);
-            }
+                function changeRadius() {
+                    heatmap.set('radius', heatmap.get('radius') ? null : 20);
+                }
 
-            function changeOpacity() {
-                heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
-            }
+                function changeOpacity() {
+                    heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+                }
 
-            // Heatmap data: 500 Points
-            function getPoints() {
-                return [
-                    new google.maps.LatLng(32.8258018,	-96.7145996),
-                    new google.maps.LatLng(32.8250999,	-96.7127991),
-                ];
-            }
-        </script>
+                function getPoints() {
+                    return [
+                        new google.maps.LatLng(37.782, -122.447),
+                        new google.maps.LatLng(37.782, -122.445),
+                        new google.maps.LatLng(37.782, -122.443)
+                    ];
+                }
+            </script>
+        </div>
+
+        <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+
+        </div>
     </div>
 </div>
 
