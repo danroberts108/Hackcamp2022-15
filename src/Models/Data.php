@@ -124,72 +124,72 @@ final class Data
         if($risk=='all'){
             //Dumfries
             $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='dumfries'");
-            $statement->execute([$risk]);
-            $dumfries = $statement->fetch();
+            $statement->execute();
+            $dumfriesResult = $statement->fetch();
 
             //Central
             $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='central'");
-            $statement->execute([$risk]);
-            $central = $statement->fetch();
+            $statement->execute();
+            $centralResult = $statement->fetch();
 
             //Glasgow
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='central'");
-            $statement->execute([$risk]);
-            $glasgow = $statement->fetch();
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='glasgow'");
+            $statement->execute();
+            $glasgowResult = $statement->fetch();
 
             //Lanarkshire
             $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='lanarkshire'");
-            $statement->execute([$risk]);
-            $lanarkshire = $statement->fetch();
+            $statement->execute();
+            $lanarkshireResult = $statement->fetch();
 
             //Edinburgh
             $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='edinburgh'");
-            $statement->execute([$risk]);
-            $edinburgh = $statement->fetch();
+            $statement->execute();
+            $edinburghResult = $statement->fetch();
 
             //Ayrshire
             $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='ayrshire'");
-            $statement->execute([$risk]);
-            $ayrshire = $statement->fetch();
+            $statement->execute();
+            $ayrshireResult = $statement->fetch();
         }
         else {
             //Dumfries
             $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='dumfries'");
             $statement->execute([$risk]);
-            $dumfries = $statement->fetch();
+            $dumfriesResult = $statement->fetch();
 
             //Central
             $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='central'");
             $statement->execute([$risk]);
-            $central = $statement->fetch();
+            $centralResult = $statement->fetch();
 
             //Glasgow
             $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='central'");
             $statement->execute([$risk]);
-            $glasgow = $statement->fetch();
+            $glasgowResult = $statement->fetch();
 
             //Lanarkshire
             $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='lanarkshire'");
             $statement->execute([$risk]);
-            $lanarkshire = $statement->fetch();
+            $lanarkshireResult = $statement->fetch();
 
             //Edinburgh
             $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='edinburgh'");
             $statement->execute([$risk]);
-            $edinburgh = $statement->fetch();
+            $edinburghResult = $statement->fetch();
 
             //Ayrshire
             $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='ayrshire'");
             $statement->execute([$risk]);
-            $ayrshire = $statement->fetch();
+            $ayrshireResult = $statement->fetch();
         }
 
-        $values = array($dumfries,
-            $central,
-            $glasgow,
-            $lanarkshire,
-            $edinburgh,
-            $ayrshire);
+        $values = array($dumfriesResult,
+            $centralResult,
+            $glasgowResult,
+            $lanarkshireResult,
+            $edinburghResult,
+            $ayrshireResult);
 
         //var_dump($values);
 

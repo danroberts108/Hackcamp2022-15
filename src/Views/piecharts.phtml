@@ -142,6 +142,115 @@
         ob_end_flush();
         ?>
     </div>
+
+    <div class="row">
+        <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+
+        </div>
+        <!-- TODO modify the pie chart code to be in a forloop,
+              the for loop iterates through an array of district
+              names and calls a function to determine percentages-->
+        <!--Pie Chart  -->
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                //Define Chart
+                var data = google.visualization.arrayToDataTable([
+                    ['Districts', 'Percentage'],
+                    ['Dumfries', <?php echo intval($view->dumfries);?>],
+                    ['Central', <?php echo intval($view->central);?>],
+                    ['Glasgow', <?php echo intval($view->glasgow);?>],
+                    ['Lanarkshire', <?php echo intval($view->lanarkshire);?>],
+                    ['Edinburgh', <?php echo intval($view->edinburgh);?>],
+                    ['Ayrshire', <?php echo intval($view->ayrshire);?>]
+                ]);
+
+                var options = {
+                    title: 'All Risks',
+                    colors: ['red','orange','yellow','blue','green','white'],
+                    pieSliceTextStyle: {
+                        color: 'black'
+                    }
+                };
+
+                //Instantiate and draw Chart
+                var chart = new google.visualization.PieChart(document.getElementById('allChart'));
+                chart.draw(data, options);
+            }
+        </script>
+        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+            <div id="allChart" style="width: 900px; height: 500px;">
+
+            </div>
+        </div>
+
+        <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+
+        </div>
+    </div>
+
+    <div class='row'>
+        <?php
+        //Output buffer used for efficiency with a lot of echos
+        ob_start();
+        foreach($view->risks as $risk) {
+            //use method in Chart to find the district percentage values of the current risk
+            //Then update values for each chart to be called in javascript below
+            $values2 = $view->chart2->calculateChart2($risk);
+            //echo "[RISK:".$risk."]";
+            $view->dumfries = intval($values2[0]["COUNT(*)"]);
+            //echo "[DUMFRIES: ".$view->dumfries."]";
+            $view->central = intval($values2[1]["COUNT(*)"]);
+            //echo "[CENTRAL: ".$view->central."]";
+            $view->glasgow = intval($values2[2]["COUNT(*)"]);
+            //echo "[GLASGOW: ".$view->glasgow."]";
+            $view->lanarkshire = intval($values2[3]["COUNT(*)"]);
+            //echo "[LANARKSHIRE: ".$view->lanarkshire."]";
+            $view->edinburgh = intval($values2[4]["COUNT(*)"]);
+            //echo "[EDINBURGH: ".$view->edinburgh."]";
+            $view->ayrshire = intval($values2[5]["COUNT(*)"]);
+            //echo "[AYRSHIRE: ".$view->ayrshire."]";
+            //Creates a pie chart for the current risk
+            echo "<div class ='col-sm-6 col-md-6 col-lg-6 col-xl-6'>";
+            echo    "<div id='".$risk."Chart'>";
+            echo        "<script type='text/javascript'>";
+            echo            "google.charts.load('current', {'packages':['corechart']});";
+            echo            "google.charts.setOnLoadCallback(drawChart);";
+
+            echo            "function drawChart() {";
+            //Define Chart
+            echo                "var data = google.visualization.arrayToDataTable([";
+            echo                    "['Districts', 'Percentage'],";
+            echo                    "['Dumfries',".$view->dumfries."],";
+            echo                    "['Central',".$view->central."],";
+            echo                    "['Glasgow',".$view->glasgow."]";
+            echo                    "['Lanarkshire',".$view->lanarkshire."]";
+            echo                    "['Edinburgh',".$view->edinburgh."]";
+            echo                    "['Ayrshire',".$view->ayrshire."]";
+            echo                "]);";
+
+            echo                "var options = {";
+            echo                    "title: '".$risk." Districts',";
+            echo                    "colors: ['red','orange','yellow','blue','green','white'],";
+            echo                    "pieSliceTextStyle: {";
+            echo                    "color: 'black'";
+            echo                "}";
+            echo            "};";
+
+            //Instantiate and draw Chart, the $risk variable is used as a parameter in a query to count
+            //the districts in the database for that risk
+            echo            "var chart = new google.visualization.PieChart(document.getElementById('".strval($risk)."Chart'));";
+            echo            "chart.draw(data, options);";
+            echo            "}";
+            echo        "</script>";
+            echo    "</div>";
+            echo "</div>";
+        }
+        ob_end_flush();
+        ?>
+    </div>
 </div>
 
 
