@@ -111,9 +111,10 @@ final class Data
     public function getRisks($district): int
     {
         $statement = $this->_db->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
-        $statement->execute([$district]);
-        var_dump($statement->fetch());
-        return intval($statement->fetch());
+        $statement->bindParam(1, $district);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result['COUNT(*)'];
     }
 
     //Used to construct the pie charts by getting the percentages of risks for the specified district
