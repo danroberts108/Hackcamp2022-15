@@ -30,6 +30,8 @@ final class Data
 
     public function addBulkData($riskArray)
     {
+        $statement = $this->_db->prepare("DELETE * FROM Risks");
+        $statement->execute();
         for ($i = 1; $i < count($riskArray); $i++) {
             $risk = $riskArray[$i];
             $this->setData($risk->getLat(), $risk->getLon(), $risk->getDistance(), $risk->getDistrict());
@@ -111,9 +113,10 @@ final class Data
     public function getRisks($district): int
     {
         $statement = $this->_db->prepare('SELECT COUNT(*) FROM Risks WHERE district=?');
-        $statement->execute([$district]);
-        var_dump($statement->fetch());
-        return intval($statement->fetch());
+        $statement->bindParam(1, $district);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result['COUNT(*)'];
     }
 
     public function lawrence($risk) {
