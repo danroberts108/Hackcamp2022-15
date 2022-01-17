@@ -10,37 +10,20 @@ class Chart
     }
 
 
-    public function calculateChart($district) {
-        //this function will be called from piecharts.phtml
-        //it gets the percentage of each type of risk to be returned as an array to piecharts.phtml
-        $values = $this->data->getSeparateRisks($district);
+    public function calculateChart() {
+        $values = $this->data->getSeparateRisks('global');
         //echo "[NEXT CHART]";
         //var_dump($values);
         return ($values);
     }
 
-    public function calculateChart2($risk) {
-        //this function will be called from piecharts.phtml
-        //it gets the percentage of each type of districts to be returned as an array to piecharts.phtml
-        $values = $this->data->lawrence($risk);
-        //echo "[NEXT CHART]";
-        //var_dump($values);
-        return ($values);
+    public function getDistricts($names) {
+        $districts = [];
+        foreach($names as $name) {
+            $values = $this->data->getSeparateRisks($name);
+            array_push($districts, new District($name,$values));
+        }
+
+        return $districts;
     }
-//
-//
-//    public function getAllRisks()
-//    {
-//        $statement = $this->connect()->prepare("SELECT * FROM Risks");
-//        $statement->execute();
-//
-//        $result = [];
-//        while ($row = $statement->fetch()) {
-//            $risk = new Risk($row['latitude'], $row['longitude'], $row['distance'], $row['district']);
-//            $risk->setId($row['id']);
-//            $result[] = $risk;
-//        }
-//
-//        return $result;
-//    }
 }

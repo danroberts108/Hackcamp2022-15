@@ -3,6 +3,7 @@ require_once("Models/Database.php");
 require_once("Models/Risk.php");
 require_once("Models/ExtendedRisk.php");
 require_once("Models/CsvParsing.php");
+require_once("Models/District.php");
 
 final class Data
 {
@@ -194,6 +195,7 @@ final class Data
 
         return $values;
     }
+
 
     //Used to construct the pie charts by getting the percentages of risks for the specified district
     public function getSeparateRisks($district)

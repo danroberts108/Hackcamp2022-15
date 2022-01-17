@@ -53,20 +53,62 @@
         <?php
         //Output buffer used for efficiency with a lot of echos
         ob_start();
+        foreach($view->risks as $risk) {
+            echo "[NEW RISK CHART]";
+            //Creates a pie chart for the current district
+            echo "<div class ='col-sm-4 col-md-4 col-lg-4 col-xl-4'>";
+            echo    "<div id='".$risk."Chart'>";
+            echo        "<script type='text/javascript'>";
+            echo            "google.charts.load('current', {'packages':['corechart']});";
+            echo            "google.charts.setOnLoadCallback(drawChart);";
+
+            echo            "function drawChart() {";
+            //Define Chart
+            echo                "var data = google.visualization.arrayToDataTable([";
+            echo                    "['District', 'Count'],";
+                                    foreach($view->districts as $district) {
+                                        echo "[NEW DISTRICT SEGMENT]";
+                                        if($risk=='high') {
+                                            var_dump($district);
+                                            echo "[".$district->getName().",".$district->getHigh()."],";
+                                        } else if($risk=='med') {
+                                            echo "[".$district->getName().",".$district->getMed()."],";
+                                        } else {
+                                            echo "[".$district->getName().",".$district->getLow()."],";
+                                        }
+                                    }
+            echo                "]);";
+
+            echo                "var options = {";
+            echo                    "title: '".$risk." Risks',";
+            echo                    "colors: ['purple','orange','blue','yellow','red','green'],";
+            echo                    "pieSliceTextStyle: {";
+            echo                    "color: 'black'";
+            echo                "}";
+            echo            "};";
+
+            //Instantiate and draw Chart, the $district variable is used as a parameter in a query to count
+            //the risks in the database for that district
+            echo            "var chart = new google.visualization.PieChart(document.getElementById('".$risk."Chart'));";
+            echo            "chart.draw(data, options);";
+            echo            "}";
+            echo        "</script>";
+            echo    "</div>";
+            echo "</div>";
+        }
+        ob_end_flush();
+        ?>
+    </div>
+
+
+    <div class='row'>
+        <?php
+        //Output buffer used for efficiency with a lot of echos
+        ob_start();
         foreach($view->districts as $district) {
-            //use method in Chart to find the risk percentage values of the current district
-            //Then update values for each chart to be called in javascript below
-            $values = $view->chart->calculateChart($district);
-            //echo "[DISTRICT:".$district."]";
-            $view->highRisk = intval($values[0]["COUNT(*)"]);
-            //echo "[HIGH RISK: ".$view->highRisk."]";
-            $view->medRisk = intval($values[1]["COUNT(*)"]);
-            //echo "[MED RISK: ".$view->medRisk."]";
-            $view->lowRisk = intval($values[2]["COUNT(*)"]);
-            //echo "[LOW RISK: ".$view->lowRisk."]";
             //Creates a pie chart for the current district
             echo "<div class ='col-sm-6 col-md-6 col-lg-6 col-xl-6'>";
-            echo    "<div id='".$district."Chart'>";
+            echo    "<div id='".$district->getName()."Chart'>";
             echo        "<script type='text/javascript'>";
             echo            "google.charts.load('current', {'packages':['corechart']});";
             echo            "google.charts.setOnLoadCallback(drawChart);";
@@ -75,13 +117,13 @@
             //Define Chart
             echo                "var data = google.visualization.arrayToDataTable([";
             echo                    "['Risks', 'Percentage'],";
-            echo                    "['High Risk',".$view->highRisk."],";
-            echo                    "['Medium Risk',".$view->medRisk."],";
-            echo                    "['Low Risk',".$view->lowRisk."]";
+            echo                    "['High Risk',".$district->getHigh()."],";
+            echo                    "['Medium Risk',".$district->getMed()."],";
+            echo                    "['Low Risk',".$district->getLow()."]";
             echo                "]);";
 
             echo                "var options = {";
-            echo                    "title: '".$district." Risks',";
+            echo                    "title: '".$district->getName()." Risks',";
             echo                    "colors: ['red','orange','yellow'],";
             echo                    "pieSliceTextStyle: {";
             echo                    "color: 'black'";
@@ -90,7 +132,7 @@
 
             //Instantiate and draw Chart, the $district variable is used as a parameter in a query to count
             //the risks in the database for that district
-            echo            "var chart = new google.visualization.PieChart(document.getElementById('".strval($district)."Chart'));";
+            echo            "var chart = new google.visualization.PieChart(document.getElementById('".strval($district->getName())."Chart'));";
             echo            "chart.draw(data, options);";
             echo            "}";
             echo        "</script>";
