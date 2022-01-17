@@ -20,9 +20,6 @@
                 //Define Chart
                 var data = google.visualization.arrayToDataTable([
                     ['Risks', 'Percentage'],
-                    //['High Risk', '<?php //echo $view->highRisk ;?>//'],
-                    //['Medium Risk', '<?php //echo $view->medRisk ;?>//'],
-                    //['Low Risk', '<?php //echo $view->lowRisk ;?>//']
                     ['High Risk', <?php echo intval($view->highRisk);?>],
                     ['Medium Risk', <?php echo intval($view->medRisk);?>],
                     ['Low Risk', <?php echo intval($view->lowRisk);?>]
