@@ -156,19 +156,19 @@
         foreach($view->risks as $risk) {
             //use method in Chart to find the district percentage values of the current risk
             //Then update values for each chart to be called in javascript below
-            $values = $view->chart->calculateChart($risk);
+            $values2 = $view->chart2->calculateChart2($risk);
             //echo "[RISK:".$risk."]";
-            $view->dumfries = intval($values[0]["COUNT(*)"]);
+            $view->dumfries = intval($values2[0]["COUNT(*)"]);
             //echo "[DUMFRIES: ".$view->dumfries."]";
-            $view->central = intval($values[1]["COUNT(*)"]);
+            $view->central = intval($values2[1]["COUNT(*)"]);
             //echo "[CENTRAL: ".$view->central."]";
-            $view->glasgow = intval($values[2]["COUNT(*)"]);
+            $view->glasgow = intval($values2[2]["COUNT(*)"]);
             //echo "[GLASGOW: ".$view->glasgow."]";
-            $view->lanarkshire = intval($values[3]["COUNT(*)"]);
+            $view->lanarkshire = intval($values2[3]["COUNT(*)"]);
             //echo "[LANARKSHIRE: ".$view->lanarkshire."]";
-            $view->edinburgh = intval($values[4]["COUNT(*)"]);
+            $view->edinburgh = intval($values2[4]["COUNT(*)"]);
             //echo "[EDINBURGH: ".$view->edinburgh."]";
-            $view->ayrshire = intval($values[5]["COUNT(*)"]);
+            $view->ayrshire = intval($values2[5]["COUNT(*)"]);
             //echo "[AYRSHIRE: ".$view->ayrshire."]";
             //Creates a pie chart for the current risk
             echo "<div class ='col-sm-6 col-md-6 col-lg-6 col-xl-6'>";
