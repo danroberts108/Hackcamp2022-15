@@ -132,7 +132,7 @@ final class Data
             $central = $statement->fetch();
 
             //Glasgow
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='central'");
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='glasgow'");
             $statement->execute([$risk]);
             $glasgow = $statement->fetch();
 
