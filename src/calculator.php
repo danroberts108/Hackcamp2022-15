@@ -4,13 +4,12 @@ require('Models/Data.php');
 require('Models/Calculator.php');
 
 $view = new stdClass();
-$view->pageTitle = 'Calculator';
 
 if(isset($_POST['submit'])) {
     $calculator = new Calculator($_POST['resources'],$_POST['district']);
     $result = $calculator->calculate();
     if (!$result) {
-        $view->result = 'not a valid number.';
+        $view->result = 'not a valid number or district.';
     }
     else {
         $view->result = $result . ' days.';

@@ -3,7 +3,6 @@
 require_once("Models/Data.php");
 
 $view = new stdClass();
-$view->pageTitle = 'Export CSV';
 
 if (isset($_POST['submit'])) {
     $data = new Data();

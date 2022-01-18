@@ -3,7 +3,6 @@
 require_once("Models/Data.php");
 
 $view = new stdClass();
-$view->pageTitle = 'Data Table';
 
 $data = new Data();
 $dataset = $data->getAllExtendedRisks();
