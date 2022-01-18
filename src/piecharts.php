@@ -6,6 +6,7 @@ require('Models/Chart.php');
 
 $view = new stdClass();
 $view->data = new Data();
+$view->pageTitle = "Risk Charts";
 
 
 //chart object is called from piecharts.phtml which runs the calculateChart($district) method
