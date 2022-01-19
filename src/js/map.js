@@ -1,7 +1,6 @@
 let map, heatmap;
 
 
-
 function initMap() {
     const mapOptions = {
         zoom: 6,
@@ -12,12 +11,11 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
     heatmap = new google.maps.visualization.HeatmapLayer({
-        data: getPoints()
+        data: getPoints(),
+        map: map,
     });
     heatmap.setMap(map);
 }
-
-
 
 
 function toggleHeatMap() {
@@ -56,8 +54,8 @@ function changeOpacity() {
 
 function getPoints() {
     return [
-        new google.maps.LatLng(37.782, -122.447),
-        new google.maps.LatLng(37.782, -122.445),
-        new google.maps.LatLng(37.782, -122.443)
+        new google.maps.LatLng(57.073156, -4.011995),
+        new google.maps.LatLng(56.073156, -4.011995),
+        new google.maps.LatLng(58.073156, -4.011995)
     ];
 }

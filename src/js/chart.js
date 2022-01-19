@@ -14,7 +14,7 @@ function drawChart() {
 
     let options = {
         title: 'Low Risks',
-        colors: ['red', 'orange', 'yellow', 'blue', 'green', 'yellow'],
+        colors: ['red', 'orange', 'purple', 'blue', 'green', 'yellow'],
         pieSliceTextStyle: {
             color: 'black'
         }

@@ -48,7 +48,7 @@ final class Data
         while ($row = $statement->fetch()) {
             $risk = new Risk($row['latitude'], $row['longitude'], $row['distance'], $row['district']);
             $risk->setId($row['id']);
-            $result[] = $risk;
+            array_push($result, $risk);
         }
 
         return $result;
@@ -75,41 +75,6 @@ final class Data
         return $result;
     }
 
-    public function getRiskFromDatabase($id): Risk
-    {
-        $statement = $this->_db->prepare("SELECT * FROM Risks WHERE id=?");
-        $statement->execute($id);
-
-        $result = $statement->fetch();
-
-        $risk = new Risk($result['lattitude'], $result['longitude'], $result['distance'], $result['district']);
-        $risk->setId($result['id']);
-
-        return $risk;
-    }
-
-    public function getRiskFromDatabaseWithLonLat($lon, $lat): Risk
-    {
-        $statement = $this->_db->prepare("SELECT * FROM Risks WHERE longitude=? AND lattitude=?");
-        $statement->execute(array($lon, $lat));
-
-        $result = $statement->fetch();
-
-        $risk = new Risk($result['lattitude'], $result['longitude'], $result['distance'], $result['district']);
-        $risk->setId($result['id']);
-
-        return $risk;
-    }
-
-    public function getNumberRisks()
-    {
-        //Shouldn't be testing for post values in the class itself - should be before the function is run
-        if (isset($_POST[''])) {
-            $statement = $this->_db->prepare('SELECT COUNT FROM Risks');
-            $statement->execute();
-        }
-    }
-
     //Returns the number of records (risks) for the specified district
     public function getRisks($district): int
     {
@@ -120,81 +85,6 @@ final class Data
         return $result['COUNT(*)'];
     }
 
-    public function lawrence($risk) {
-        if($risk=='all'){
-            //Dumfries
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='dumfries'");
-            $statement->execute();
-            $dumfriesResult = $statement->fetch();
-
-            //Central
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='central'");
-            $statement->execute();
-            $centralResult = $statement->fetch();
-
-            //Glasgow
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='glasgow'");
-            $statement->execute();
-            $glasgowResult = $statement->fetch();
-
-            //Lanarkshire
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='lanarkshire'");
-            $statement->execute();
-            $lanarkshireResult = $statement->fetch();
-
-            //Edinburgh
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='edinburgh'");
-            $statement->execute();
-            $edinburghResult = $statement->fetch();
-
-            //Ayrshire
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where district ='ayrshire'");
-            $statement->execute();
-            $ayrshireResult = $statement->fetch();
-        }
-        else {
-            //Dumfries
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='dumfries'");
-            $statement->execute([$risk]);
-            $dumfriesResult = $statement->fetch();
-
-            //Central
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='central'");
-            $statement->execute([$risk]);
-            $centralResult = $statement->fetch();
-
-            //Glasgow
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='central'");
-            $statement->execute([$risk]);
-            $glasgowResult = $statement->fetch();
-
-            //Lanarkshire
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='lanarkshire'");
-            $statement->execute([$risk]);
-            $lanarkshireResult = $statement->fetch();
-
-            //Edinburgh
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='edinburgh'");
-            $statement->execute([$risk]);
-            $edinburghResult = $statement->fetch();
-
-            //Ayrshire
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance=? AND district ='ayrshire'");
-            $statement->execute([$risk]);
-            $ayrshireResult = $statement->fetch();
-        }
-
-        $values = array($dumfriesResult,
-            $centralResult,
-            $glasgowResult,
-            $lanarkshireResult,
-            $edinburghResult,
-            $ayrshireResult);
-
-        //var_dump($values);
-
-        return $values;
-    }
 
 
     //Used to construct the pie charts by getting the percentages of risks for the specified district
