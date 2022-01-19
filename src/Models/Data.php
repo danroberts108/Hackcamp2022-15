@@ -48,7 +48,7 @@ final class Data
         while ($row = $statement->fetch()) {
             $risk = new Risk($row['latitude'], $row['longitude'], $row['distance'], $row['district']);
             $risk->setId($row['id']);
-            $result[] = $risk;
+            array_push($result, $risk);
         }
 
         return $result;
