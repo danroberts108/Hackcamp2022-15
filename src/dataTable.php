@@ -3,6 +3,7 @@
 require_once("Models/Data.php");
 
 $view = new stdClass();
+$view->pageTitle = 'Register';
 
 $data = new Data();
 $dataset = $data->getAllExtendedRisks();
