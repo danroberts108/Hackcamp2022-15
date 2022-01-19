@@ -8,9 +8,9 @@ $data = new Data();
 
 $risks = $data->getAllRisks();
 
-$coordinates = [];
+$view->coordinates = [];
 foreach($risks as $risk) {
-    array_push($coordinates, $risk->getLat().", ".$risk->getLon());
+    $view->coordinates[] = array($risk->getLat(), $risk->getLon());
 }
 //var_dump($coordinates);
 
