@@ -54,7 +54,6 @@
         //Output buffer used for efficiency with a lot of echos
         ob_start();
         foreach($view->risks as $risk) {
-            echo "[NEW RISK CHART]";
             //Creates a pie chart for the current district
             echo "<div class ='col-sm-4 col-md-4 col-lg-4 col-xl-4'>";
             echo    "<div id='".$risk."Chart'>";
@@ -68,11 +67,14 @@
             echo                    "['District', 'Count'],";
                                     foreach($view->districts as $district) {
                                         if($risk=='high') {
-                                            echo "[".$district->getName().",".$district->getHigh()."],";
+                                            echo "['".$district->getName()."',".$district->getHigh()."]";
                                         } else if($risk=='med') {
-                                            echo "[".$district->getName().",".$district->getMed()."],";
+                                            echo "['".$district->getName()."',".$district->getMed()."]";
                                         } else {
-                                            echo "[".$district->getName().",".$district->getLow()."],";
+                                            echo "['".$district->getName()."',".$district->getLow()."]";
+                                        }
+                                        if ($district->getName() != 'Ayrshire & Clyde South') {
+                                            echo ",";
                                         }
                                     }
             echo                "]);";
@@ -96,9 +98,6 @@
         }
         ob_end_flush();
         ?>
-        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            <div id="lowChart"></div>
-        </div>
     </div>
 
 
@@ -145,7 +144,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="js/chart.js"></script>
+<!--<script type="text/javascript" src="js/chart.js"></script>-->
 
 
 <?php require('template/footer.phtml') ?>
