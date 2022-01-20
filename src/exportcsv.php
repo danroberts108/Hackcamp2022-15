@@ -3,7 +3,7 @@
 require_once("Models/Data.php");
 
 $view = new stdClass();
-$view->pageTitle = 'Register';
+$view->pageTitle = 'Download';
 
 if (isset($_POST['submit'])) {
     $data = new Data();

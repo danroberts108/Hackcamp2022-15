@@ -5,7 +5,7 @@ require('Models/Calculator.php');
 require('Models/Chart.php');
 
 $view = new stdClass();
-$view->pageTitle = 'Register';
+$view->pageTitle = 'Risk Charts';
 $view->data = new Data();
 $view->pageTitle = "Risk Charts";
 

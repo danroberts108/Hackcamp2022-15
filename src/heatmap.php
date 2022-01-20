@@ -2,7 +2,7 @@
 require_once("Models/Data.php");
 
 $view = new stdClass();
-$view->pageTitle = 'Register';
+$view->pageTitle = 'Map';
 
 $data = new Data();
 

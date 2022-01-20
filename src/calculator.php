@@ -4,7 +4,7 @@ require('Models/Data.php');
 require('Models/Calculator.php');
 
 $view = new stdClass();
-$view->pageTitle = 'Register';
+$view->pageTitle = 'Risk Calculator';
 
 if(isset($_POST['submit'])) {
     $calculator = new Calculator($_POST['resources'],$_POST['district']);
