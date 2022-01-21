@@ -80,7 +80,7 @@
             echo                "]);";
 
             echo                "var options = {";
-            echo                    "title: '".$risk." Risks',";
+            echo                    "title: '"; switch ($risk) {case "high": echo "High"; break; case "med": echo "Medium"; break; case "low":echo "Low"; break; } echo " Risks',";
             echo                    "colors: ['purple','orange','blue','yellow','red','green'],";
             echo                    "pieSliceTextStyle: {";
             echo                    "color: 'black'";
