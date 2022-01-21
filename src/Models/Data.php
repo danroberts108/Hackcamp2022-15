@@ -88,14 +88,21 @@ final class Data
     public function getRisksType($district, $type) {
         switch ($type) {
             case "high":
-                $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks WHERE district=? AND distance>=3");
+                $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks WHERE district=? AND distance<=1");
                 $statement->execute(array($district));
+                break;
             case "medium":
                 $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks WHERE district=? AND distance>1 AND distance<3");
                 $statement->execute(array($district));
+                break;
             case "low":
-                $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks WHERE district=? AND distance<=1");
+                $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks WHERE district=? AND distance>=3");
                 $statement->execute(array($district));
+                break;
+            case "*":
+                $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks WHERE district=?");
+                $statement->execute(array($district));
+                break;
         }
         $result = $statement->fetch();
         return $result['COUNT(*)'];

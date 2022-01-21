@@ -7,7 +7,7 @@ $view = new stdClass();
 $view->pageTitle = 'Risk Calculator';
 
 if(isset($_POST['submit'])) {
-    $calculator = new Calculator($_POST['resources'],$_POST['district']);
+    $calculator = new Calculator($_POST['resources'],$_POST['district'], $_POST['type']);
     $result = $calculator->calculate();
     if (!$result) {
         $view->result = 'not a valid number or district.';
