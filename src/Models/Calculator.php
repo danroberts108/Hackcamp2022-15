@@ -15,8 +15,24 @@ class Calculator {
     }
 
     public function calculate() {
-        $risks = $this->_data->getRisksType($this->district, $this->type);
-
+        if ($this->district == "*") {
+            switch ($this->type) {
+                case "high":
+                    $risks = $this->_data->getAllHighRisksNum();
+                    break;
+                case "medium":
+                    $risks = $this->_data->getAllMedRisksNum();
+                    break;
+                case "low":
+                    $risks = $this->_data->getAllLowRisksNum();
+                    break;
+                case "*":
+                    $risks = $this->_data->getAllRisksNum();
+                    break;
+            }
+        } else {
+            $risks = $this->_data->getRisksType($this->district, $this->type);
+        }
 
         if (!is_numeric($this->resources)) {
             return false;
