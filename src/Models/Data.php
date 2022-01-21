@@ -115,7 +115,7 @@ final class Data
             $highResult = $statement->fetch();
 
             //Medium Risk
-            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<=3 AND distance>1 AND district =?");
+            $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<3 AND distance>1 AND district =?");
             $statement->execute([$district]);
             $medResult = $statement->fetch();
 
@@ -131,6 +131,30 @@ final class Data
         //var_dump($values);
 
         return $values;
+    }
+
+    public function getAllHighRisks() {
+        //High Risk
+        $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<=1");
+        $statement->execute();
+        $highResult = $statement->fetch();
+        return $highResult['COUNT(*)'];
+    }
+
+    public function getAllMedRisks() {
+        //Medium Risk
+        $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<=3 AND distance>1");
+        $statement->execute();
+        $medResult = $statement->fetch();
+        return $medResult['COUNT(*)'];
+    }
+
+    public function getAllLowRisks() {
+        //Low Risk
+        $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance>=3");
+        $statement->execute();
+        $lowResult = $statement->fetch();
+        return $lowResult['COUNT(*)'];
     }
 
     public function getRisksDatabaseCsv() {
