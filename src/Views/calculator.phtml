@@ -5,38 +5,58 @@
 </div>
 <div class="row">
     <div class="col-4">
-        <form method="post">
+        <form method="post" id="print">
             <div class="mb-3">
                 <label for="district">District</label>
-                <select class="form-select" name="district" value="All">
-                    <option value="*" selected>All</option>
-                    <option value="Dumfries">Dumfries</option>
-                    <option value="Central & Fife">Central & Fife</option>
-                    <option value="Glasgow">Glasgow</option>
-                    <option value="Lanarkshire">Lanarkshire</option>
-                    <option value="Edinburgh & Borders">Edinburgh & Borders</option>
-                    <option value="Ayrshire & Clyde South">Ayrshire & Clyde South</option>
+                <select class="form-select" name="district" value="<?php if (isset($_POST['submit'])) { echo $_POST['district']; } ?>">
+                    <option value="*" <?php if ($_POST['district'] == '*') { echo 'selected'; } ?>>All</option>
+                    <option value="Dumfries" <?php if ($_POST['district'] == 'Dumfries') { echo 'selected'; } ?>>Dumfries</option>
+                    <option value="Central & Fife" <?php if ($_POST['district'] == 'Central & Fife') { echo 'selected'; } ?>>Central & Fife</option>
+                    <option value="Glasgow" <?php if ($_POST['district'] == 'Glasgow') { echo 'selected'; } ?>>Glasgow</option>
+                    <option value="Lanarkshire" <?php if ($_POST['district'] == 'Lanarkshire') { echo 'selected'; } ?>>Lanarkshire</option>
+                    <option value="Edinburgh & Borders" <?php if ($_POST['district'] == 'Edinburgh & Borders') { echo 'selected'; } ?>>Edinburgh & Borders</option>
+                    <option value="Ayrshire & Clyde South" <?php if ($_POST['district'] == 'Ayshire & Clyde South') { echo 'selected'; } ?>>Ayrshire & Clyde South</option>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="type">Risk Type</label>
                 <select class="form-select" name="type" value="">
-                    <option value="*" selected>All</option>
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
+                    <option value="*" <?php if ($_POST['type'] == '*') { echo 'selected'; } ?>>All</option>
+                    <option value="high" <?php if ($_POST['type'] == 'high') { echo 'selected'; } ?>>High</option>
+                    <option value="medium" <?php if ($_POST['type'] == 'medium') { echo 'selected'; } ?>>Medium</option>
+                    <option value="low" <?php if ($_POST['type'] == 'low') { echo 'selected'; } ?>>Low</option>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="resources" class="form-label">Resources</label>
-                <input type="number" name="resources" placeholder="Resources" class="form-control" />
+                <input type="number" name="resources" placeholder="Resources" class="form-control" <?php if (isset($_POST['submit'])) { echo 'value="' . $_POST['resources'] . '"'; } ?>/>
             </div>
             <button class="btn btn-primary" type="submit" name="submit">Calculate</button>
+            <?php
+            if (isset($_POST['submit'])) {
+                echo '
+                <button class="btn btn-primary" onClick="printPage()">Print</button>
+                <script type="text/javascript">
+                    function printPage(){
+                        let printContents = document.getElementById("print").innerHTML;
+                        let printContents2 = document.getElementById("print2").innerHTML;
+                        let originalContents = document.body.innerHTML;
+
+                        document.body.innerHTML = printContents + printContents2;
+
+                        window.print();
+
+                        document.body.innerHTML = originalContents;
+                    }
+                </script>
+                ';
+            }
+            ?>
         </form>
     </div>
     <div class="col-2"></div>
     <div class="col-4">
-        <form style="padding-top: 5rem;">
+        <form style="padding-top: 5rem;" id="print2">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Time:</span>
                 <input type="text" class="form-control" placeholder="Time" value="<?php if (isset($view->result)){echo $view->result;} ?>" disabled>
@@ -45,8 +65,5 @@
     </div>
     <div class="col-2"></div>
 </div>
-<!--<?php if (isset($view->result)) : ?>
-    <p><?php echo $view->result; ?></p>
-<?php endif; ?>-->
 
 <?php require('template/footer.phtml') ?>
