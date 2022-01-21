@@ -85,7 +85,21 @@ final class Data
         return $result['COUNT(*)'];
     }
 
-
+    public function getRisksType($district, $type) {
+        switch ($type) {
+            case "high":
+                $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks WHERE district=? AND distance>=3");
+                $statement->execute(array($district));
+            case "medium":
+                $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks WHERE district=? AND distance>1 AND distance<3");
+                $statement->execute(array($district));
+            case "low":
+                $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks WHERE district=? AND distance<=1");
+                $statement->execute(array($district));
+        }
+        $result = $statement->fetch();
+        return $result['COUNT(*)'];
+    }
 
     //Used to construct the pie charts by getting the percentages of risks for the specified district
     public function getSeparateRisks($district)
