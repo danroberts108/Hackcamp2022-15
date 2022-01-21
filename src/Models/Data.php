@@ -164,7 +164,7 @@ final class Data
 
     public function getAllMedRisksNum() {
         //Medium Risk
-        $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<=3 AND distance>1");
+        $statement = $this->_db->prepare("SELECT COUNT(*) FROM Risks where distance<3 AND distance>1");
         $statement->execute();
         $medResult = $statement->fetch();
         return $medResult['COUNT(*)'];
