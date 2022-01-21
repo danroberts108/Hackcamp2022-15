@@ -3,7 +3,7 @@
 <div class="row page-header">
     <h1 class="page-title">Risk Charts</h1>
 </div>
-<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" id="print">
     <div class="row">
         <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
 
@@ -142,6 +142,21 @@
         ob_end_flush();
         ?>
     </div>
+</div>
+<div class="row form-container">
+    <button class="btn btn-primary" onClick="printPage()">Download</button>
+    <script type="text/javascript">
+        function printPage(){
+            let printContents = document.getElementById("print").innerHTML;
+            let originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
 </div>
 
 
