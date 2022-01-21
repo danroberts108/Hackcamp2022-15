@@ -9,22 +9,22 @@
             <div class="mb-3">
                 <label for="district">District</label>
                 <select class="form-select" name="district" value="<?php if (isset($_POST['submit'])) { echo $_POST['district']; } ?>">
-                    <option value="*" <?php if ($_POST['district'] == '*') { echo 'selected'; } ?>>All</option>
-                    <option value="Dumfries" <?php if ($_POST['district'] == 'Dumfries') { echo 'selected'; } ?>>Dumfries</option>
-                    <option value="Central & Fife" <?php if ($_POST['district'] == 'Central & Fife') { echo 'selected'; } ?>>Central & Fife</option>
-                    <option value="Glasgow" <?php if ($_POST['district'] == 'Glasgow') { echo 'selected'; } ?>>Glasgow</option>
-                    <option value="Lanarkshire" <?php if ($_POST['district'] == 'Lanarkshire') { echo 'selected'; } ?>>Lanarkshire</option>
-                    <option value="Edinburgh & Borders" <?php if ($_POST['district'] == 'Edinburgh & Borders') { echo 'selected'; } ?>>Edinburgh & Borders</option>
-                    <option value="Ayrshire & Clyde South" <?php if ($_POST['district'] == 'Ayshire & Clyde South') { echo 'selected'; } ?>>Ayrshire & Clyde South</option>
+                    <option value="*" <?php if (isset($_POST['submit'])){if ($_POST['district'] == '*') { echo 'selected'; }} ?>>All</option>
+                    <option value="Dumfries" <?php if (isset($_POST['submit'])){if ($_POST['district'] == 'Dumfries') { echo 'selected'; }} ?>>Dumfries</option>
+                    <option value="Central & Fife" <?php if (isset($_POST['submit'])){if ($_POST['district'] == 'Central & Fife') { echo 'selected'; }} ?>>Central & Fife</option>
+                    <option value="Glasgow" <?php if (isset($_POST['submit'])){if ($_POST['district'] == 'Glasgow') { echo 'selected'; }} ?>>Glasgow</option>
+                    <option value="Lanarkshire" <?php if (isset($_POST['submit'])){if ($_POST['district'] == 'Lanarkshire') { echo 'selected'; }} ?>>Lanarkshire</option>
+                    <option value="Edinburgh & Borders" <?php if (isset($_POST['submit'])){if ($_POST['district'] == 'Edinburgh & Borders') { echo 'selected'; }} ?>>Edinburgh & Borders</option>
+                    <option value="Ayrshire & Clyde South" <?php if (isset($_POST['submit'])){if ($_POST['district'] == 'Ayshire & Clyde South') { echo 'selected'; }} ?>>Ayrshire & Clyde South</option>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="type">Risk Type</label>
                 <select class="form-select" name="type" value="">
-                    <option value="*" <?php if ($_POST['type'] == '*') { echo 'selected'; } ?>>All</option>
-                    <option value="high" <?php if ($_POST['type'] == 'high') { echo 'selected'; } ?>>High</option>
-                    <option value="medium" <?php if ($_POST['type'] == 'medium') { echo 'selected'; } ?>>Medium</option>
-                    <option value="low" <?php if ($_POST['type'] == 'low') { echo 'selected'; } ?>>Low</option>
+                    <option value="*" <?php if (isset($_POST['submit'])){if ($_POST['type'] == '*') { echo 'selected'; }} ?>>All</option>
+                    <option value="high" <?php if (isset($_POST['submit'])){if ($_POST['type'] == 'high') { echo 'selected'; }} ?>>High</option>
+                    <option value="medium" <?php if (isset($_POST['submit'])){if ($_POST['type'] == 'medium') { echo 'selected'; }} ?>>Medium</option>
+                    <option value="low" <?php if (isset($_POST['submit'])){if ($_POST['type'] == 'low') { echo 'selected'; }} ?>>Low</option>
                 </select>
             </div>
             <div class="mb-3">
@@ -42,7 +42,7 @@
                         let printContents2 = document.getElementById("print2").innerHTML;
                         let originalContents = document.body.innerHTML;
 
-                        document.body.innerHTML = printContents + printContents2;
+                        document.body.innerHTML = printContents + "<br/>" + printContents2;
 
                         window.print();
 
