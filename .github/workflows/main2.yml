@@ -12,11 +12,15 @@ jobs:
 
     - name: Set up secret file
       env:
-        DEBUG_PASSWORD: ${{ secrets.DEBUG_PASSWORD }}
-        DEBUG_SECRET_KEY: ${{ secrets.DEBUG_SECRET_KEY }}
+        DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
       run: |
-        echo $DEBUG_PASSWORD >> secrets.txt
-        echo $DEBUG_SECRET_KEY >> secrets.txt
+        echo $DEPLOY_HOST >> secrets.txt
+        echo $DEPLOY_KEY >> secrets.txt
+        echo $DEPLOY_PATH >> secrets.txt
+        echo $DEPLOY_USER >> secrets.txt
 
     - name: Run tmate
       uses: mxschmitt/action-tmate@v2
